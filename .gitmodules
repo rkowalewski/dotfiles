@@ -1,0 +1,12 @@
+[submodule "mintty/themes/mintty-colors-solarized"]
+	path = mintty/themes/mintty-colors-solarized
+	url = git@github.com:karlin/mintty-colors-solarized.git
+[submodule "mintty/themes/mintty-colors-solarized2"]
+	path = mintty/themes/mintty-colors-solarized2
+	url = git@github.com:mavnn/mintty-colors-solarized.git
+[submodule "vim/.vim/bundle/vim-colors-solarized"]
+	path = vim/.vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/.vim/bundle/vim-solarized8"]
+	path = vim/.vim/bundle/vim-solarized8
+	url = https://github.com/lifepillar/vim-solarized8
