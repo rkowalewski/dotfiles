@@ -1,11 +1,13 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="babun"
+# Path to your oh-my-zsh installation.
+  export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,15 +51,16 @@ ZSH_THEME="babun"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git common-aliases)
+plugins=(git git-fast common-aliases tmux zsh-256color git-prompt)
+
 
 # User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
 export DOTFILES=$HOME/.dotfiles
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -68,11 +71,13 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR=vim
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -83,17 +88,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-
 if [ -n "${CYGWIN// }" ];
 then
   source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
 fi
 
+#load dircolors if present
+[[ -f ~/.dir_colors ]] && eval `dircolors ~/.dir_colors`
+
 # source all files from custom zsh aliases
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
 # load local settings
-[[ -f $DOTFILES/zsh/settings.local ]] && source $DOTFILES/zsh/settings.local
+[[ -f $DOTFILES/zsh/settings.local.zsh ]] && source $DOTFILES/zsh/settings.local.zsh
 
-# alias to ubuntu on windows subsystem
-alias ubuntu="/cygdrive/c/Users/kowalewski/src/wslbridge/out/wslbridge.exe -C ~ -t"
