@@ -128,7 +128,7 @@ set smartcase
 " Always show status line
 set laststatus=2
 " Enable mouse in all modes
-set mouse=a
+set mouse-=a
 set ttymouse=xterm2
 " Disable error bells
 set noerrorbells

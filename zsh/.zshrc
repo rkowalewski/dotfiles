@@ -58,7 +58,6 @@ plugins=(git git-fast common-aliases tmux zsh-256color git-prompt)
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,6 +101,7 @@ fi
 # source all files from custom zsh aliases
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
-# load local settings
-[[ -f $DOTFILES/zsh/settings.local.zsh ]] && source $DOTFILES/zsh/settings.local.zsh
+alias tmux='tmux -2'
 
+# load local settings
+[[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
