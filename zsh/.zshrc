@@ -105,3 +105,4 @@ alias tmux='tmux -2'
 
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+
