@@ -52,7 +52,7 @@ ZSH_CUSTOM=$DOTFILES/zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-fast colored-man colorize common-aliases tmux zsh-256color git-prompt ssh-agent)
+plugins=(git gitfast colored-man colorize common-aliases tmux zsh-256color git-prompt ssh-agent)
 ##
 
 
@@ -63,6 +63,8 @@ plugins=(git git-fast colored-man colorize common-aliases tmux zsh-256color git-
 source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
