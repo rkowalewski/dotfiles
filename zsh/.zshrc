@@ -53,6 +53,7 @@ ZSH_CUSTOM=$DOTFILES/zsh/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-fast colored-man colorize common-aliases tmux zsh-256color git-prompt ssh-agent)
+##
 
 
 # User configuration
