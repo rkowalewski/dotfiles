@@ -55,7 +55,7 @@ set ttyfast
 set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
 set binary
-set noeol
+set eol
 
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
@@ -225,6 +225,7 @@ colorscheme solarized8_dark       " Use custom color scheme.
   let g:syntastic_loc_list_height = 5
   let g:syntastic_c_check_header = 1
   let g:syntastic_cpp_check_header = 1
+  let g:syntastic_debug = 0
 
 "  let g:syntastic_html_checkers = [ "jshint" ]
 "  let g:syntastic_javascript_checkers = [ "jshint" ]
