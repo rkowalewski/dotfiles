@@ -1,7 +1,12 @@
 Columns=150
 Rows=55
-Font=DejaVu Sans Mono for Powerline
+#Font=DejaVu Sans Mono for Powerline
+#FontHeight=10
+Font=Source Code Pro Light
 FontHeight=10
+RowSpacing=1
+#Font=Ubuntu Mono derivative Powerline
+#FontHeight=11
 BoldAsFont=no
 Charset=UTF-8
 Locale=en_US
@@ -29,3 +34,4 @@ BoldCyan=148,216,229
 BoldWhite=248,248,242
 OpaqueWhenFocused=no
 AltFnShortcuts=yes
+

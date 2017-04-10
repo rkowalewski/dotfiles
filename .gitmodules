@@ -37,3 +37,6 @@
 [submodule "vim/.vim/bundle/vim-syntastic"]
 	path = vim/.vim/bundle/vim-syntastic
 	url = git@github.com:vim-syntastic/syntastic.git
+[submodule "vim/.vim/bundle/dracula-theme"]
+	path = vim/.vim/bundle/dracula-theme
+	url = git@github.com:dracula/vim.git

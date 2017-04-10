@@ -93,16 +93,20 @@ export EDITOR=vim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-if [ -n "${CYGWIN// }" ];
-then
-  source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
-fi
-
-#load dircolors if present
-[[ -f ~/.dir_colors ]] && eval `dircolors ~/.dir_colors`
 
 # source all files from custom zsh aliases
+
+export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
+
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
+
+# load solarized theme
+if [[ "$(uname)" =~ CYGWIN_NT.* ]];
+then
+  source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
+  #prepare appropriate dircolors
+  setupsolarized dircolors.ansi-dark
+fi
 
 alias tmux='tmux -2'
 
