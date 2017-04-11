@@ -33,23 +33,20 @@ set wildmenu
 set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
-" Optimize for fast terminal connections
-set ttyfast
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
 set binary
 set eol
 
-" Don’t create backups when editing files in certain directories
-set backupskip=/tmp/*,/private/tmp/*
-
 " Respect modeline in files
 set modeline
 set modelines=4
+
 " Enable per-directory .vimrc files and disable unsafe commands in them
 set exrc
 set secure
+
 " Enable line numbers
 set number
 " Enable syntax highlighting
@@ -60,10 +57,41 @@ set cursorline
 " Show “invisible” characters
 set list listchars=tab:▸\ ,trail:·,nbsp:_
 
+" Always show status line
+set laststatus=2
+" Enable mouse in all modes
+set mouse-=a
+set ttymouse=xterm2
+" Disable error bells
+set noerrorbells
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Show the cursor position
+set ruler
+" Don’t show the intro message when starting Vim
+set shortmess=atI
+" Show the current mode
+set showmode
+" Show the filename in the window titlebar
+set title
+" Show the (partial) command as it’s being typed
+set showcmd
+
+" Vim splits to the right and below
+set splitbelow
+set splitright
+
+
+" ================ Line Breaks ======================
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 set tw=78
 
+
+" ================ Performance ======================
+set ttyfast
+set lazyredraw
+syntax sync minlines=256
 
 " ================ Indentation ======================
 set autoindent
@@ -106,32 +134,6 @@ set ignorecase
 " ...unless we type a capital
 set smartcase
 
-" Add the g flag to search/replace by default
-" set gdefault
-
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse-=a
-set ttymouse=xterm2
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
-set showcmd
-
-" Vim splits to the right and below
-set splitbelow
-set splitright
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -140,6 +142,9 @@ set splitright
 set nobackup
 set nowb
 set noswapfile
+
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
@@ -151,31 +156,53 @@ try
 catch
 endtry
 
-augroup configgroup
-  autocmd!
-  autocmd VimEnter * highlight clear SignColumn
-  autocmd FileType java setlocal noexpandtab
-  autocmd FileType java setlocal list
-  autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-  autocmd FileType java setlocal formatprg=par\ -w80\ -T4
-  autocmd FileType ruby setlocal tabstop=2
-  autocmd FileType ruby setlocal shiftwidth=2
-  autocmd FileType ruby setlocal softtabstop=2
-  autocmd FileType ruby setlocal commentstring=#\ %s
-  autocmd FileType python setlocal commentstring=#\ %s
-  autocmd BufEnter *.cls setlocal filetype=java
-  autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-  autocmd BufEnter Makefile setlocal noexpandtab
-  autocmd BufEnter *.sh setlocal tabstop=2
-  autocmd BufEnter *.sh setlocal shiftwidth=2
-  autocmd BufEnter *.sh setlocal softtabstop=2
-  " Treat .json files as .js
-  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-  " Treat .md files as Markdown
-  autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-  " Treat .tex files as tex
-  autocmd BufRead,BufNewFile *.tex set filetype=tex
-augroup END
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    TMUX specific settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if exists('$TMUX')
+  " allows cursor change in tmux mode
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+" However use it only if not running TMUX
+  set clipboard=unnamed           " ┐
+                                  " │ Use the system clipboard
+  if has("unnamedplus")           " │ as the default register.
+      set clipboard+=unnamedplus  " │
+  endif
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits
+if exists('$TMUX')
+  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    let previous_winnr = winnr()
+    silent! execute "wincmd " . a:wincmd
+    if previous_winnr == winnr()
+      call system("tmux select-pane -" . a:tmuxdir)
+      redraw!
+    endif
+  endfunction
+
+  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+else
+  map <C-h> <C-w><C-h>
+  map <C-j> <C-w>j
+  map <C-k> <C-w><C-k>
+  map <C-l> <C-w>l
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Solarzied Colorscheme
@@ -239,7 +266,7 @@ nnoremap ü <C-]>
 " => Airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+    "let g:airline_symbols = {}
 endif
 
 " let g:Powerline_symbols = 'fancy'
@@ -273,10 +300,8 @@ if has("autocmd")
     " the `~/.vimrc` file whenever they are changed.
 
     augroup auto_reload_vim_configs
-
         autocmd!
-        autocmd BufWritePost vimrc source $MYVIMRC
-
+        autocmd BufWritePost $MYVIMRC so $MYVIMRC
     augroup END
 
     " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -304,6 +329,32 @@ if has("autocmd")
         autocmd!
         autocmd BufWritePre * if index(excludedFileTypes, &ft) < 0 | :call StripTrailingWhitespaces()
 
+    augroup END
+
+    augroup configgroup
+      autocmd!
+      autocmd VimEnter * highlight clear SignColumn
+      autocmd FileType java setlocal noexpandtab
+      autocmd FileType java setlocal list
+      autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+      autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+      autocmd FileType ruby setlocal tabstop=2
+      autocmd FileType ruby setlocal shiftwidth=2
+      autocmd FileType ruby setlocal softtabstop=2
+      autocmd FileType ruby setlocal commentstring=#\ %s
+      autocmd FileType python setlocal commentstring=#\ %s
+      autocmd BufEnter *.cls setlocal filetype=java
+      autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+      autocmd BufEnter Makefile setlocal noexpandtab
+      autocmd BufEnter *.sh setlocal tabstop=2
+      autocmd BufEnter *.sh setlocal shiftwidth=2
+      autocmd BufEnter *.sh setlocal softtabstop=2
+      " Treat .json files as .js
+      autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+      " Treat .md files as Markdown
+      autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+      " Treat .tex files as tex
+      autocmd BufRead,BufNewFile *.tex set filetype=tex
     augroup END
 endif
 
@@ -335,19 +386,6 @@ function! StripTrailingWhitespaces()
 
 endfunction
 
-function! GetGitBranchName()
-
-    let branchName = ""
-
-    if exists("g:loaded_fugitive")
-        let branchName = "[" . fugitive#head() . "]"
-    endif
-
-    return branchName
-
-endfunction
-
-
 " ----------------------------------------------------------------------
 " | Key Mappings                                                       |
 " ----------------------------------------------------------------------
@@ -364,50 +402,6 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-" However use it only if not running TMUX
-
-if exists('$TMUX')
-  " allows cursor change in tmux mode
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-
-  set clipboard=unnamed           " ┐
-                                  " │ Use the system clipboard
-  if has("unnamedplus")           " │ as the default register.
-      set clipboard+=unnamedplus  " │
-  endif
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w><C-h>
-  map <C-j> <C-w>j
-  map <C-k> <C-w><C-k>
-  map <C-l> <C-w>l
-endif
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
