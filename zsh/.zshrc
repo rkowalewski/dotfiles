@@ -105,8 +105,10 @@ if [[ "$(uname)" =~ CYGWIN_NT.* ]];
 then
   source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
   #prepare appropriate dircolors
-  setupsolarized dircolors.ansi-dark
 fi
+
+#set solarized
+setupsolarized dircolors.ansi-dark
 
 alias tmux='tmux -2'
 
