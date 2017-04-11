@@ -7,6 +7,8 @@ set nocompatible
 
 " Use pathogen to inject all plugins
 let g:pathogen_disabled = []
+" Does not work in windows --> disable it and use different approach
+call add(g:pathogen_disabled, 'vim-tmux-navigator')
 " vim-gutentags plugin requires at least version 7.4
 if v:version < '704'
    call add(g:pathogen_disabled, 'vim-gutentags')
@@ -24,24 +26,6 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-" However use it only if not running TMUX
-
-if exists('$TMUX')
-  " allows cursor change in tmux mode
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-
-  set clipboard=unnamed           " ┐
-                                  " │ Use the system clipboard
-  if has("unnamedplus")           " │ as the default register.
-      set clipboard+=unnamedplus  " │
-  endif
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
 " Enhance command-line completion
 set wildmenu
@@ -380,6 +364,50 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+" However use it only if not running TMUX
+
+if exists('$TMUX')
+  " allows cursor change in tmux mode
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+  set clipboard=unnamed           " ┐
+                                  " │ Use the system clipboard
+  if has("unnamedplus")           " │ as the default register.
+      set clipboard+=unnamedplus  " │
+  endif
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits
+if exists('$TMUX')
+  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    let previous_winnr = winnr()
+    silent! execute "wincmd " . a:wincmd
+    if previous_winnr == winnr()
+      call system("tmux select-pane -" . a:tmuxdir)
+      redraw!
+    endif
+  endfunction
+
+  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  nnoremap <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  nnoremap <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  nnoremap <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  nnoremap <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+else
+  map <C-h> <C-w><C-h>
+  map <C-j> <C-w>j
+  map <C-k> <C-w><C-k>
+  map <C-l> <C-w>l
+endif
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
