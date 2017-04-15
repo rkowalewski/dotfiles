@@ -97,23 +97,22 @@ export EDITOR=vim
 # source all files from custom zsh aliases
 
 
+export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
+
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
 #----------------SOLARIZED---------------------------------------------------
-export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
 
 function set_solarized_color {
   local hour="$(date +"%H")"
   if [[ $hour -gt 18 ]] || [[ $hour -lt 7 ]]; then
     source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
-    setupsolarized dircolors.ansi-dark
     # This is only a hack as we can safely transmit LC_* variables in many SSH
     # Servers. Then we can set the vim theme accordingly
-    export LC_SOLARIZED_THEME="SOLARIZED_DARK"
+    export LC_SOLARIZED_THEME="dark"
   else
     source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-light.sh
-    setupsolarized dircolors.ansi-light
-    export LC_SOLARIZED_THEME="SOLARIZED_LIGHT"
+    export LC_SOLARIZED_THEME="light"
   fi
 }
 # load solarized theme
@@ -125,6 +124,12 @@ elif [[ "$(uname -sr)" =~ ^Linux.*Microsoft$ ]]; then
   # We are in Bash On Windows
 elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
   # We are in a ssh session...
+fi
+
+if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
+  setupsolarized dircolors.ansi-dark
+else
+  setupsolarized dircolors.ansi-light
 fi
 
 #----------------------------------------------------------------------------------
