@@ -97,7 +97,7 @@ export EDITOR=vim
 # source all files from custom zsh aliases
 
 
-export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
+export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/external/dircolors-solarized
 
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
@@ -106,12 +106,12 @@ for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 function set_solarized_color {
   local hour="$(date +"%H")"
   if [[ $hour -gt 18 ]] || [[ $hour -lt 7 ]]; then
-    source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-dark.sh
+    source $DOTFILES/external/mintty-colors-solarized/mintty-solarized-dark.sh
     # This is only a hack as we can safely transmit LC_* variables in many SSH
     # Servers. Then we can set the vim theme accordingly
     export LC_SOLARIZED_THEME="dark"
   else
-    source $DOTFILES/mintty/themes/mintty-colors-solarized/mintty-solarized-light.sh
+    source $DOTFILES/external/mintty-colors-solarized/mintty-solarized-light.sh
     export LC_SOLARIZED_THEME="light"
   fi
 }
