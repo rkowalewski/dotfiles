@@ -209,13 +209,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256                   " Enable full-color support.
 
-" auto detect light or dark background
-let iterm_profile = $ITERM_PROFILE
-if iterm_profile == "light"
-    set background=light
-else
-    set background=dark
-endif
+" See https://github.com/lifepillar/vim-solarized8
 
 if !has("gui_running")
   " let g:solarized_contrast = "high"
@@ -225,6 +219,10 @@ endif
 
 colorscheme solarized8_dark       " Use custom color scheme.
 
+fun! Solarized8Contrast(delta)
+  let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
+  exe "colors" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
+endf
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
@@ -452,7 +450,21 @@ nmap <F4> :TagbarToggle <CR>
 
 map <leader>W :w !sudo tee %<CR>
 
-highlight Cursor guifg=black guibg=white
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,B ] switch betweeen dark and light color schemes
+nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+  \ ? substitute(g:colors_name, 'dark', 'light', '')
+  \ : substitute(g:colors_name, 'light', 'dark', '')
+  \ )<cr>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,+ ] / [,- ] Increase / Decrease contrast of solarized theme
+nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
+nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " ----------------------------------------------------------------------
 " | Local Settings                                                     |
