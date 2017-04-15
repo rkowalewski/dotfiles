@@ -81,6 +81,7 @@ set showcmd
 set splitbelow
 set splitright
 
+highlight Cursor guifg=black guibg=white
 
 " ================ Line Breaks ======================
 set nowrap       "Don't wrap lines

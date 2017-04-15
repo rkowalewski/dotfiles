@@ -96,9 +96,11 @@ export EDITOR=vim
 
 # source all files from custom zsh aliases
 
-export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
 
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
+
+#----------------SOLARIZED---------------------------------------------------
+export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/dircolors-solarized
 
 function set_solarized_color {
   local hour="$(date +"%H")"
@@ -125,7 +127,7 @@ elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
   # We are in a ssh session...
 fi
 
-#set solarized
+#----------------------------------------------------------------------------------
 
 alias tmux='tmux -2'
 
