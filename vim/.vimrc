@@ -10,9 +10,9 @@ let g:pathogen_disabled = []
 " Does not work in windows --> disable it and use different approach
 call add(g:pathogen_disabled, 'vim-tmux-navigator')
 " vim-gutentags plugin requires at least version 7.4
-if v:version < '704'
-   call add(g:pathogen_disabled, 'vim-gutentags')
-   endif
+if v:version < '704' || !executable('ctags')
+  call add(g:pathogen_disabled, 'vim-gutentags')
+endif
 
 execute pathogen#infect()
 
