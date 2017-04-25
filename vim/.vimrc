@@ -218,12 +218,18 @@ if !has("gui_running")
   " let g:solarized_visibility = "high"
 endif
 
-colorscheme solarized8_dark       " Use custom color scheme.
 
 fun! Solarized8Contrast(delta)
   let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
   exe "colors" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
 endf
+
+if $LC_SOLARIZED_THEME == 'light'
+  colorscheme solarized8_light       " Use custom color scheme.
+else
+  colorscheme solarized8_dark
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
