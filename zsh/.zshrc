@@ -52,7 +52,7 @@ ZSH_CUSTOM=$DOTFILES/zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast colored-man-pages colorize common-aliases tmux zsh-256color git-prompt ssh-agent)
+plugins=(git gitfast colored-man-pages colorize common-aliases tmux zsh-256color git-prompt ssh-agent zsh_reload)
 ##
 
 
@@ -135,6 +135,8 @@ fi
 #----------------------------------------------------------------------------------
 
 alias tmux='tmux -2'
+# do not share history between tmux windows
+unsetopt share_history
 
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
