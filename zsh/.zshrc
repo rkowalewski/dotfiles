@@ -124,15 +124,13 @@ function switch_solarized {
   elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
     # We are in a ssh session...
   fi
-
-  if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
-    setup_solarized_dircolors dircolors.ansi-dark
-  else
-    setup_solarized_dircolors dircolors.ansi-light
-  fi
 }
 
 function setup_solarized {
+  if [[ -n "$LC_SOLARIZED_THEME" ]]; then
+    return 0
+  fi
+
   local hour="$(date +"%H")"
   if [[ $hour -ge 18 ]] || [[ $hour -lt 7 ]]; then
     switch_solarized "dark"
@@ -142,6 +140,12 @@ function setup_solarized {
 }
 
 setup_solarized
+
+if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
+  setup_solarized_dircolors dircolors.ansi-dark
+else
+  setup_solarized_dircolors dircolors.ansi-light
+fi
 
 #----------------------------------------------------------------------------------
 
