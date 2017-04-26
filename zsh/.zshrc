@@ -102,35 +102,46 @@ export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/external/dircolors-solarized
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
 #----------------SOLARIZED---------------------------------------------------
+function switch_solarized {
 
-function set_solarized_color {
-  local hour="$(date +"%H")"
-  if [[ $hour -gt 18 ]] || [[ $hour -lt 7 ]]; then
-    source $DOTFILES/external/mintty-colors-solarized/mintty-solarized-dark.sh
-    # This is only a hack as we can safely transmit LC_* variables in many SSH
-    # Servers. Then we can set the vim theme accordingly
-    export LC_SOLARIZED_THEME="dark"
+  # This is only a hack as we can safely transmit LC_* variables in many SSH
+  # Servers. Then we can set the vim theme accordingly
+  export LC_SOLARIZED_THEME="${1:-dark}"
+
+  if [[ "$(uname)" =~ CYGWIN_NT.* ]];
+  then
+    local solarized_path="$DOTFILES/external/mintty-colors-solarized"
+
+    if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
+      source "$solarized_path/mintty-solarized-dark.sh"
+    else
+      source "$solarized_path/mintty-solarized-light.sh"
+    fi
+  elif [[ "$(uname -sr)" =~ ^Linux.*Microsoft$ ]]; then
+    # We are in Bash On Windows
+  elif [[ "$(uname)" =~ *Darwin* ]]; then
+    # We are in MacOS
+  elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+    # We are in a ssh session...
+  fi
+
+  if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
+    setup_solarized_dircolors dircolors.ansi-dark
   else
-    source $DOTFILES/external/mintty-colors-solarized/mintty-solarized-light.sh
-    export LC_SOLARIZED_THEME="light"
+    setup_solarized_dircolors dircolors.ansi-light
   fi
 }
-# load solarized theme
-if [[ "$(uname)" =~ CYGWIN_NT.* ]];
-then
-  #prepare appropriate dircolors
-  set_solarized_color
-elif [[ "$(uname -sr)" =~ ^Linux.*Microsoft$ ]]; then
-  # We are in Bash On Windows
-elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-  # We are in a ssh session...
-fi
 
-if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
-  setupsolarized dircolors.ansi-dark
-else
-  setupsolarized dircolors.ansi-light
-fi
+function setup_solarized {
+  local hour="$(date +"%H")"
+  if [[ $hour -ge 18 ]] || [[ $hour -lt 7 ]]; then
+    switch_solarized "dark"
+  else
+    switch_solarized "light"
+  fi
+}
+
+setup_solarized
 
 #----------------------------------------------------------------------------------
 

@@ -5,7 +5,7 @@ if [ -z "$_ZSH_DIRCOLORS_SOLARIZED_CONF" ]; then
     _ZSH_DIRCOLORS_SOLARIZED_CONF=$HOME/.zsh-dircolors.config
 fi
 
-function lssolarized ()
+function ls_solarized_dircolors ()
 {
     for i in ${_ZSH_DIRCOLORS_SOLARIZED_DIR}/dircolors.*
     do
@@ -13,7 +13,7 @@ function lssolarized ()
     done
 }
 
-function setupsolarized ()
+function setup_solarized_dircolors ()
 {
     local _SOLARIZED_THEME="dircolors.ansi-universal"
     [[ $# -eq 1 ]] && _SOLARIZED_THEME=$1
