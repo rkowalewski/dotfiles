@@ -1,6 +1,6 @@
 typeset -U path
 
-path+='$HOME/bin'
+path+="$HOME/bin"
 path+='/usr/local/bin'
 
 # prepend path

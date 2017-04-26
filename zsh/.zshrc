@@ -159,6 +159,9 @@ alias tmux='tmux -2'
 # do not share history between tmux windows
 unsetopt share_history
 
+# Bind Ctrl-U to backward-kill-line instead of the whole line
+bindkey \^U backward-kill-line
+
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
