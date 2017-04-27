@@ -139,13 +139,17 @@ function setup_solarized {
   fi
 }
 
-setup_solarized
+#setup_solarized
+#
 
-if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
-  setup_solarized_dircolors dircolors.ansi-dark
-else
-  setup_solarized_dircolors dircolors.ansi-light
-fi
+dynamic-colors init
+eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.256dark`
+
+#if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
+#  setup_solarized_dircolors dircolors.ansi-dark
+#else
+#  setup_solarized_dircolors dircolors.ansi-light
+#fi
 
 #----------------------------------------------------------------------------------
 
