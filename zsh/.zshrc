@@ -127,22 +127,24 @@ function switch_solarized {
 }
 
 function setup_solarized {
-  if [[ -n "$LC_SOLARIZED_THEME" ]]; then
+  if [[ -n "$LC_COLORSCHEME" ]]; then
     return 0
   fi
 
-  local hour="$(date +"%H")"
-  if [[ $hour -ge 18 ]] || [[ $hour -lt 7 ]]; then
-    switch_solarized "dark"
-  else
-    switch_solarized "light"
-  fi
+  dynamic-colors init
+
+  export LC_COLORSCHEME=`cat $DOTFILES/external/dynamic-colors/colorscheme`
+
+ # local hour="$(date +"%H")"
+ # if [[ $hour -ge 18 ]] || [[ $hour -lt 7 ]]; then
+ #   switch_solarized "dark"
+ # else
+ #   switch_solarized "light"
+ # fi
 }
 
-#setup_solarized
-#
+setup_solarized
 
-dynamic-colors init
 eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.256dark`
 
 #if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
