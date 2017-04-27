@@ -34,3 +34,6 @@
 [submodule "external/dynamic-colors"]
 	path = external/dynamic-colors
 	url = git@github.com:sos4nt/dynamic-colors.git
+[submodule "external/dircolors-solarized"]
+	path = external/dircolors-solarized
+	url = git@github.com:seebi/dircolors-solarized.git
