@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+#
   export ZSH=/home/kowalewski/.oh-my-zsh
 
 export DOTFILES=$HOME/.dotfiles
@@ -97,61 +98,11 @@ export EDITOR=vim
 # source all files from custom zsh aliases
 
 
-export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/external/dircolors-solarized
+#export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/external/dircolors-solarized
 
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
-#----------------SOLARIZED---------------------------------------------------
-function switch_solarized {
-
-  # This is only a hack as we can safely transmit LC_* variables in many SSH
-  # Servers. Then we can set the vim theme accordingly
-  export LC_SOLARIZED_THEME="${1:-dark}"
-
-  if [[ "$(uname)" =~ CYGWIN_NT.* ]];
-  then
-    local solarized_path="$DOTFILES/external/mintty-colors-solarized"
-
-    if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
-      source "$solarized_path/mintty-solarized-dark.sh"
-    else
-      source "$solarized_path/mintty-solarized-light.sh"
-    fi
-  elif [[ "$(uname -sr)" =~ ^Linux.*Microsoft$ ]]; then
-    # We are in Bash On Windows
-  elif [[ "$(uname)" =~ *Darwin* ]]; then
-    # We are in MacOS
-  elif [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-    # We are in a ssh session...
-  fi
-}
-
-function setup_solarized {
-  if [[ -n "$LC_COLORSCHEME" ]]; then
-    return 0
-  fi
-
-  dynamic-colors init
-
-  export LC_COLORSCHEME=`cat $DOTFILES/external/dynamic-colors/colorscheme`
-
- # local hour="$(date +"%H")"
- # if [[ $hour -ge 18 ]] || [[ $hour -lt 7 ]]; then
- #   switch_solarized "dark"
- # else
- #   switch_solarized "light"
- # fi
-}
-
-setup_solarized
-
 eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.256dark`
-
-#if [[ "$LC_SOLARIZED_THEME" == "dark" ]]; then
-#  setup_solarized_dircolors dircolors.ansi-dark
-#else
-#  setup_solarized_dircolors dircolors.ansi-light
-#fi
 
 #----------------------------------------------------------------------------------
 

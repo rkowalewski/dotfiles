@@ -6,8 +6,8 @@ path+='/usr/local/bin'
 # prepend path
 path=('/opt/openmpi/2.1.0/bin' $path)
 
+path=('/opt/tmux/bin' $path)
 # append path
-path=('/opt/tmux/2.3/bin' $path)
 
 #dynamic colors
 [[ -z "$DYNAMIC_COLORS_ROOT" ]] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
@@ -18,3 +18,4 @@ path=("$DYNAMIC_COLORS_ROOT/bin" $path)
 path=($^path(N))
 export PATH
 
+[[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local

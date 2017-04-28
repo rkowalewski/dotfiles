@@ -1,13 +1,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Pathogen Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-
 set nocompatible
+
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " Use pathogen to inject all plugins
 let g:pathogen_disabled = []
 " Does not work in windows --> disable it and use different approach
+" call add(g:pathogen_disabled, 'vim-gutentags')
 call add(g:pathogen_disabled, 'vim-tmux-navigator')
 " vim-gutentags plugin requires at least version 7.4
 if v:version < '704' || !executable('ctags')
@@ -210,7 +211,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256                   " Enable full-color support.
 
-" See https://github.com/lifepillar/vim-solarized8
 
 if !has("gui_running")
   " let g:solarized_contrast = "high"
@@ -224,12 +224,9 @@ fun! Solarized8Contrast(delta)
   exe "colors" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
 endf
 
-if $LC_SOLARIZED_THEME == 'light'
-  colorscheme solarized8_light       " Use custom color scheme.
-else
-  colorscheme solarized8_dark
-endif
-
+set background=dark
+" See https://github.com/lifepillar/vim-solarized8
+colorscheme solarized8_dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
@@ -338,28 +335,28 @@ if has("autocmd")
 
     augroup configgroup
       autocmd!
-      autocmd VimEnter * highlight clear SignColumn
-      autocmd FileType java setlocal noexpandtab
-      autocmd FileType java setlocal list
-      autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-      autocmd FileType java setlocal formatprg=par\ -w80\ -T4
-      autocmd FileType ruby setlocal tabstop=2
-      autocmd FileType ruby setlocal shiftwidth=2
-      autocmd FileType ruby setlocal softtabstop=2
-      autocmd FileType ruby setlocal commentstring=#\ %s
-      autocmd FileType python setlocal commentstring=#\ %s
-      autocmd BufEnter *.cls setlocal filetype=java
-      autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-      autocmd BufEnter Makefile setlocal noexpandtab
-      autocmd BufEnter *.sh setlocal tabstop=2
-      autocmd BufEnter *.sh setlocal shiftwidth=2
-      autocmd BufEnter *.sh setlocal softtabstop=2
-      " Treat .json files as .js
-      autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-      " Treat .md files as Markdown
-      autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-      " Treat .tex files as tex
-      autocmd BufRead,BufNewFile *.tex set filetype=tex
+       autocmd VimEnter * highlight clear SignColumn
+       autocmd FileType java setlocal noexpandtab
+       autocmd FileType java setlocal list
+       autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+       autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+       autocmd FileType ruby setlocal tabstop=2
+       autocmd FileType ruby setlocal shiftwidth=2
+       autocmd FileType ruby setlocal softtabstop=2
+       autocmd FileType ruby setlocal commentstring=#\ %s
+       autocmd FileType python setlocal commentstring=#\ %s
+       autocmd BufEnter *.cls setlocal filetype=java
+       autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+       autocmd BufEnter Makefile setlocal noexpandtab
+       autocmd BufEnter *.sh setlocal tabstop=2
+       autocmd BufEnter *.sh setlocal shiftwidth=2
+       autocmd BufEnter *.sh setlocal softtabstop=2
+       " Treat .json files as .js
+       autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+       " Treat .md files as Markdown
+       autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+       " Treat .tex files as tex
+       autocmd BufRead,BufNewFile *.tex set filetype=tex
     augroup END
 endif
 
