@@ -9,11 +9,11 @@ path=('/opt/openmpi/2.1.0/bin' $path)
 # append path
 path=('/opt/tmux/2.3/bin' $path)
 
-# VIM Installation
-path=('/opt/vim/bin' $path)
+#dynamic colors
+export DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
+path = ("$HOME/.dotfiles/external/dynamic-colors/bin" $path)
 
 # add only those paths which really exist and finally export it
 path=($^path(N))
 export PATH
 
-[[ -f $HOME/.zshenv.local ]] && source $HOME/.zshenv.local
