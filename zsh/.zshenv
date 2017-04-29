@@ -10,7 +10,9 @@ path=('/opt/tmux/bin' $path)
 # append path
 
 #dynamic colors
-[[ -z "$DYNAMIC_COLORS_ROOT" ]] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
+[ -z "${DYNAMIC_COLORS_ROOT}" ] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
+
+export DYNAMIC_COLORS_ROOT
 
 path=("$DYNAMIC_COLORS_ROOT/bin" $path)
 

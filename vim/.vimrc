@@ -262,6 +262,9 @@ let g:clang_format#detect_style_file = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap ü <C-]>
 
+let g:gutentags_exclude_project_root = []
+call add(g:gutentags_exclude_project_root, $DOTFILES)
+
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

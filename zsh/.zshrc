@@ -102,7 +102,9 @@ export EDITOR=vim
 
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
-eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.256dark`
+[[ -n "$(type dynamic-colors)" ]] && dynamic-colors init
+
+eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.ansi-dark`
 
 #----------------------------------------------------------------------------------
 
