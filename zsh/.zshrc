@@ -5,6 +5,7 @@
 #
   export ZSH=/home/kowalewski/.oh-my-zsh
 
+export PURE_PROMPT_SYMBOL="$"
 export DOTFILES=$HOME/.dotfiles
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -53,7 +54,7 @@ ZSH_CUSTOM=$DOTFILES/zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast colored-man-pages colorize common-aliases tmux zsh-256color git-prompt ssh-agent zsh_reload)
+plugins=(git gitfast colored-man-pages colorize common-aliases tmux zsh-256color ssh-agent zsh_reload)
 ##
 
 
