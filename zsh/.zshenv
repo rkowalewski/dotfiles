@@ -8,6 +8,7 @@ path=('/opt/openmpi/2.1.0/bin' $path)
 
 path=('/opt/tmux/bin' $path)
 # append path
+path=("$HOME/opt/bin" $path)
 
 #dynamic colors
 [ -z "${DYNAMIC_COLORS_ROOT}" ] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors

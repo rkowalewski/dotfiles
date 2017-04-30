@@ -37,3 +37,6 @@
 [submodule "external/dircolors-solarized"]
 	path = external/dircolors-solarized
 	url = git@github.com:seebi/dircolors-solarized.git
+[submodule "external/zsh-pure"]
+	path = external/zsh-pure
+	url = git@github.com:sindresorhus/pure.git
