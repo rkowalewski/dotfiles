@@ -257,6 +257,7 @@ colorscheme solarized8_dark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_format#detect_style_file = 1
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ctags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -264,6 +265,24 @@ nnoremap ü <C-]>
 
 let g:gutentags_exclude_project_root = []
 call add(g:gutentags_exclude_project_root, $DOTFILES)
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => The silver seacher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -471,6 +490,14 @@ nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
 nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
 nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
 
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,+ ] / [,- ] Increase / Decrease contrast of solarized theme
+nnoremap <space>. :CtrlPTag<CR>
+nnoremap <space>b :CtrlPBuffer<CR>
+
+
+map <F2> :ls<CR>:b<Space>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " ----------------------------------------------------------------------

@@ -7,6 +7,10 @@ path+='/usr/local/bin'
 path=('/opt/openmpi/2.1.0/bin' $path)
 
 path=('/opt/tmux/bin' $path)
+
+# VIM
+path=('/opt/vim/bin' $path)
+
 # append path
 path=("$HOME/opt/bin" $path)
 

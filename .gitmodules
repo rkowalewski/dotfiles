@@ -40,3 +40,9 @@
 [submodule "external/zsh-pure"]
 	path = external/zsh-pure
 	url = git@github.com:sindresorhus/pure.git
+[submodule "vim/.vim/bundle/ctrlp.vim"]
+	path = vim/.vim/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim.git
+[submodule "vim/.vim/bundle/ctrlp-py-matcher"]
+	path = vim/.vim/bundle/ctrlp-py-matcher
+	url = git@github.com:FelikZ/ctrlp-py-matcher.git
