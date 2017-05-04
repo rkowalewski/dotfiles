@@ -5,12 +5,19 @@
 #
   export ZSH=/home/kowalewski/.oh-my-zsh
 
-export PURE_PROMPT_SYMBOL="$"
 export DOTFILES=$HOME/.dotfiles
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="pure"
+
+if [[ `uname` =~ ^CYGWIN_NT ]]; then
+  # Async pure theme not supported on windows
+  # see https://github.com/sindresorhus/pure/issues/198
+  ZSH_THEME="babun"
+else
+  PURE_PROMPT_SYMBOL="$"
+  ZSH_THEME="pure"
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
