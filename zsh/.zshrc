@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 #
-  export ZSH=/home/kowalewski/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 export DOTFILES=$HOME/.dotfiles
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -105,8 +105,6 @@ export EDITOR=vim
 
 # source all files from custom zsh aliases
 
-
-#export ZSH_DIRCOLORS_SOLARIZED_DIR=${DOTFILES}/external/dircolors-solarized
 
 for file in $DOTFILES/zsh/aliases/**/*(.); source $file
 
