@@ -10,6 +10,7 @@ let g:pathogen_disabled = []
 " Does not work in windows --> disable it and use different approach
 " call add(g:pathogen_disabled, 'vim-gutentags')
 call add(g:pathogen_disabled, 'vim-tmux-navigator')
+" call add(g:pathogen_disabled, 'vim-syntastic')
 " vim-gutentags plugin requires at least version 7.4
 if v:version < '704' || !executable('ctags')
   call add(g:pathogen_disabled, 'vim-gutentags')
@@ -77,6 +78,9 @@ set showmode
 set title
 " Show the (partial) command as it’s being typed
 set showcmd
+
+" Keep buffers open in background
+set hidden
 
 " Vim splits to the right and below
 set splitbelow
@@ -243,13 +247,14 @@ colorscheme solarized8_dark
 "  let g:syntastic_html_checkers = [ "jshint" ]
 "  let g:syntastic_javascript_checkers = [ "jshint" ]
 
-" Disable syntax checking by default.
+" Disable syntax checking by default.:de
 
 "let g:syntastic_mode_map = {
 "    \ "active_filetypes": ["c", "cpp"],
 "    \ "mode": "active",
 "    \ "passive_filetypes": []
 "\}
+
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -293,20 +298,26 @@ if !exists('g:airline_symbols')
     "let g:airline_symbols = {}
 endif
 
-" let g:Powerline_symbols = 'fancy'
-" enable syntastic extension with airline
 let g:airline_powerline_fonts = 1
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 2
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ' '
+let g:airline#extensions#tabline#right_alt_sep = '|'
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = '|'
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = '|'
+let g:airline_theme= 'solarized'
 
 let g:airline#enable#fugitive=1
 let g:airline#enable#syntastic=1
-let g:airline#enable#bufferline=1
+"let g:airline#enable#bufferline=1
 
+" enable syntastic extension with airline
 let g:airline#extensions#syntastic#enabled=1
 
 
@@ -476,6 +487,11 @@ nmap <F4> :TagbarToggle <CR>
 
 map <leader>W :w !sudo tee %<CR>
 
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [, cf] ClangFormat
+
+map <leader>cf :ClangFormat<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [,B ] switch betweeen dark and light color schemes

@@ -46,3 +46,6 @@
 [submodule "vim/.vim/bundle/ctrlp-py-matcher"]
 	path = vim/.vim/bundle/ctrlp-py-matcher
 	url = git@github.com:FelikZ/ctrlp-py-matcher.git
+[submodule "vim/.vim/bundle/vim-bufferline"]
+	path = vim/.vim/bundle/vim-bufferline
+	url = git@github.com:bling/vim-bufferline.git
