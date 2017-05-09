@@ -11,6 +11,7 @@ let g:pathogen_disabled = []
 " call add(g:pathogen_disabled, 'vim-gutentags')
 call add(g:pathogen_disabled, 'vim-tmux-navigator')
 " call add(g:pathogen_disabled, 'vim-syntastic')
+call add(g:pathogen_disabled, 'ale')
 " vim-gutentags plugin requires at least version 7.4
 if v:version < '704' || !executable('ctags')
   call add(g:pathogen_disabled, 'vim-gutentags')
@@ -313,13 +314,37 @@ let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
 let g:airline_theme= 'solarized'
 
-let g:airline#enable#fugitive=1
-let g:airline#enable#syntastic=1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+" let g:airline#enable#syntastic=1
 "let g:airline#enable#bufferline=1
 
 " enable syntastic extension with airline
-let g:airline#extensions#syntastic#enabled=1
+" let g:airline#extensions#syntastic#enabled=1
 
+let g:airline#extensions#ale#error_symbol = 'E:'
+let g:airline#extensions#ale#warning_symbol = 'W:'
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_c_gcc_options = '-std=c99 -Wall -Wextra -Werror -pedantic -Wno-unused-function -Wno-unused-variable -DDART_ENABLE_ASSERTIONS -DDART_ENABLE_LOGGING -DDASH_ENABLE_PMEM -I./dart-impl/base/include -I./dart-impl/mpi/include -I./dart-impl/shmem/include -I./dart-if/include -I/home/kowalewski/opt/pmem/include -I/home/kowalewski/workspaces/googletest/googletest/include -I/opt/ohpc/pub/mpi/openmpi-gnu/1.10.4/include'
+let g:ale_cpp_gcc_options = '-I../googletest/googletest/include -I./dash/include -I./dart-impl/mpi/include -I./dart-impl/base/include -I./dart-if/include -I/home/kowalewski/opt/pmem/include -I/home/kowalewski/workspaces/googletest/googletest/include -std=c++11 -Wall -Wextra -Wno-unused-function -Wno-missing-braces -Wno-sign-compare -Wno-format -Wno-unused-parameter -Wno-unused-variable -DDASH_ENABLE_LOGGING -DDASH_ENABLE_TEST_LOGGING -DDART_ENABLE_ASSERTIONS -DDART_ENABLE_LOGGING -DDASH_ENABLE_PMEM -DMPI_IMPL_ID'
+
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
+" call airline#parts#define_function('ALE', 'ALEGetStatusLine')
+"call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
+
+" let g:airline_section_error = airline#section#create_right(['ALE'])
+" let g:airline_section_error = '%{ALEGetStatusLine()}'
+
+"function! ALE() abort
+"    return exists('*ALEGetStatusLine') ? ALEGetStatusLine() : ''
+"endfunction
+"let g:airline_section_error = '%{ALE()}'
 
 " ----------------------------------------------------------------------
 " | Automatic Commands                                                 |

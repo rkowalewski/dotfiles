@@ -1,5 +1,7 @@
 typeset -U path
 
+typeset -U manpath
+
 path+="$HOME/bin"
 path+='/usr/local/bin'
 
@@ -24,5 +26,8 @@ path=("$DYNAMIC_COLORS_ROOT/bin" $path)
 # add only those paths which really exist and finally export it
 path=($^path(N))
 export PATH
+
+manpath+=$HOME/opt/stdman/share/man
+typeset -U manpath
 
 [[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local

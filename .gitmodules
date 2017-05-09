@@ -49,3 +49,9 @@
 [submodule "vim/.vim/bundle/vim-bufferline"]
 	path = vim/.vim/bundle/vim-bufferline
 	url = git@github.com:bling/vim-bufferline.git
+[submodule "vim/.vim/bundle/ale"]
+	path = vim/.vim/bundle/ale
+	url = git@github.com:w0rp/ale.git
+[submodule "zsh/custom/plugins/solarized-man"]
+	path = zsh/custom/plugins/solarized-man
+	url = git@github.com:zlsun/solarized-man.git
