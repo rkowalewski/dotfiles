@@ -1,24 +1,51 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Pathogen Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
+set nocompatible " be iMproved, required
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'W0rp/ale'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'Kien/ctrlp.vim'
+Plugin 'Vim-airline/vim-airline'
+Plugin 'Vim-airline/vim-airline-themes'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'Bling/vim-bufferline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Ludovicchabant/vim-gutentags'
+Plugin 'Szw/vim-maximizer'
+Plugin 'Jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'tpope/vim-pathogen'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'Vim-syntastic/syntastic'
+Plugin 'Christoomey/vim-tmux-navigator'
+Plugin 'VundleVim/Vundle.vim'
+
+
 
 " Use pathogen to inject all plugins
-let g:pathogen_disabled = []
+" let g:pathogen_disabled = []
 " Does not work in windows --> disable it and use different approach
 " call add(g:pathogen_disabled, 'vim-gutentags')
-call add(g:pathogen_disabled, 'vim-tmux-navigator')
+" call add(g:pathogen_disabled, 'vim-tmux-navigator')
 " call add(g:pathogen_disabled, 'vim-syntastic')
-call add(g:pathogen_disabled, 'ale')
+" call add(g:pathogen_disabled, 'ale')
 " vim-gutentags plugin requires at least version 7.4
-if v:version < '704' || !executable('ctags')
-  call add(g:pathogen_disabled, 'vim-gutentags')
-endif
+" if v:version < '704' || !executable('ctags')
+"  call add(g:pathogen_disabled, 'vim-gutentags')
+" endif
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 " Enable file type detection
 filetype on
 filetype plugin on
@@ -516,7 +543,7 @@ map <leader>W :w !sudo tee %<CR>
 
 " [, cf] ClangFormat
 
-map <leader>cf :ClangFormat<CR>
+map <leader>cf :Autoformat<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [,B ] switch betweeen dark and light color schemes
