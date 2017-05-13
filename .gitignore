@@ -2,3 +2,4 @@ tags
 .netrwhist
 tmp
 .notags
+vim/.vim/bundle/**

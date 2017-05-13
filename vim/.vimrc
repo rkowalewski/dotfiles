@@ -4,13 +4,15 @@
 set nocompatible " be iMproved, required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'W0rp/ale'
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugin 'W0rp/ale'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'Kien/ctrlp.vim'
 Plugin 'Vim-airline/vim-airline'
@@ -19,15 +21,17 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'Bling/vim-bufferline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Ludovicchabant/vim-gutentags'
 Plugin 'Szw/vim-maximizer'
 Plugin 'Jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'tpope/vim-pathogen'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'Vim-syntastic/syntastic'
-Plugin 'Christoomey/vim-tmux-navigator'
-Plugin 'VundleVim/Vundle.vim'
 
+" Plugin 'Christoomey/vim-tmux-navigator'
+
+if v:version < '704' || !executable('ctags')
+  Plugin 'Ludovicchabant/vim-gutentags'
+endif
 
 
 " Use pathogen to inject all plugins
