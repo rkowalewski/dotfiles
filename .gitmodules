@@ -10,6 +10,3 @@
 [submodule "zsh/custom/plugins/solarized-man"]
 	path = zsh/custom/plugins/solarized-man
 	url = git@github.com:zlsun/solarized-man.git
-[submodule "vim/.vim/bundle/vundle"]
-	path = vim/.vim/bundle/vundle
-	url = git@github.com:VundleVim/Vundle.vim.git
