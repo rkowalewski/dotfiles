@@ -1,7 +1,8 @@
+set nocompatible " be iMproved
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Pathogen Configuration
+" => Vundle Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible " be iMproved, required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/Vundle.vim
@@ -18,35 +19,26 @@ Plugin 'Kien/ctrlp.vim'
 Plugin 'Vim-airline/vim-airline'
 Plugin 'Vim-airline/vim-airline-themes'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'Bling/vim-bufferline'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'Bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Szw/vim-maximizer'
 Plugin 'Jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'tpope/vim-pathogen'
 Plugin 'lifepillar/vim-solarized8'
-Plugin 'Vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'flazz/vim-colorschemes'
+
+if v:version > 741 && (has('python') || has('python3'))
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'rdnetto/YCM-Generator'
+endif
 
 " Plugin 'Christoomey/vim-tmux-navigator'
 
-if v:version < '704' || !executable('ctags')
+if v:version >= '704' && executable('ctags')
   Plugin 'Ludovicchabant/vim-gutentags'
 endif
 
 
-" Use pathogen to inject all plugins
-" let g:pathogen_disabled = []
-" Does not work in windows --> disable it and use different approach
-" call add(g:pathogen_disabled, 'vim-gutentags')
-" call add(g:pathogen_disabled, 'vim-tmux-navigator')
-" call add(g:pathogen_disabled, 'vim-syntastic')
-" call add(g:pathogen_disabled, 'ale')
-" vim-gutentags plugin requires at least version 7.4
-" if v:version < '704' || !executable('ctags')
-"  call add(g:pathogen_disabled, 'vim-gutentags')
-" endif
-
-" execute pathogen#infect()
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -56,204 +48,43 @@ filetype plugin on
 filetype indent on
 syntax on
 
+" Basic Settings
+source ~/.vim/basic.vim
+source ~/.vim/tmux.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General Settings
+" => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enhance command-line completion
-set wildmenu
-" Allow cursor keys in insert mode
-set esckeys
-" Allow backspace in insert mode
-set backspace=indent,eol,start
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Don’t add empty newlines at the end of files
-set binary
-set eol
-
-" Respect modeline in files
-set modeline
-set modelines=4
-
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
-set secure
-
-" Enable line numbers
-set number
-" Enable syntax highlighting
-syntax on
-" Highlight current line
-set cursorline
-
-" Show “invisible” characters
-set list listchars=tab:▸\ ,trail:·,nbsp:_
-
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse-=a
-set ttymouse=xterm2
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
-set showcmd
-
-" Keep buffers open in background
-set hidden
-
-" Vim splits to the right and below
-set splitbelow
-set splitright
-
-highlight Cursor guifg=black guibg=white
-
-" ================ Line Breaks ======================
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
-set tw=78
-
-
-" ================ Performance ======================
-set ttyfast
-set lazyredraw
-syntax sync minlines=256
-
-" ================ Indentation ======================
-set autoindent
-set smartindent
-set smarttab
-" 1 tab == 2 spaces
-set tabstop=2                  " ┐
-set softtabstop=2              " │ Set global <TAB> settings.
-set shiftwidth=2               " │
-set expandtab                  " ┘
-
-
-
-" " ================ Folds ============================
-
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set foldenable        "fold by default
-set foldlevelstart=10   " open most folds by default
-
-" ================ Scrolling ========================
-
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-" ============= Formatting of Text ===================
-if executable('par')
-  set formatprg=par\ -w80
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
 endif
 
-" ================ Search ===========================
-"
-" Highlight dynamically as pattern is typed
-set incsearch
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" ...unless we type a capital
-set smartcase
 
+set background=dark
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-" Don’t create backups when editing files in certain directories
-set backupskip=/tmp/*,/private/tmp/*
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on
-"    means that you can undo even when you close a buffer/VIM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-try
-    set undodir=~/.vim/undo
-    set undofile
-catch
-endtry
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"    TMUX specific settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if exists('$TMUX')
-  " allows cursor change in tmux mode
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-" However use it only if not running TMUX
-  set clipboard=unnamed           " ┐
-                                  " │ Use the system clipboard
-  if has("unnamedplus")           " │ as the default register.
-      set clipboard+=unnamedplus  " │
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
   endif
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w><C-h>
-  map <C-j> <C-w>j
-  map <C-k> <C-w><C-k>
-  map <C-l> <C-w>l
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Solarzied Colorscheme
+" => Solarzed Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256                   " Enable full-color support.
-
-
 if !has("gui_running")
   " let g:solarized_contrast = "high"
   let g:solarized_termtrans = 0
   " let g:solarized_visibility = "high"
 endif
 
+try
+  " See https://github.com/lifepillar/vim-solarized8
+  colorscheme solarized8_dark
+catch
+endtry
 
 fun! Solarized8Contrast(delta)
   let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
@@ -261,8 +92,6 @@ fun! Solarized8Contrast(delta)
 endf
 
 set background=dark
-" See https://github.com/lifepillar/vim-solarized8
-colorscheme solarized8_dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
@@ -275,18 +104,6 @@ colorscheme solarized8_dark
   let g:syntastic_c_check_header = 1
   let g:syntastic_cpp_check_header = 1
   let g:syntastic_debug = 0
-
-"  let g:syntastic_html_checkers = [ "jshint" ]
-"  let g:syntastic_javascript_checkers = [ "jshint" ]
-
-" Disable syntax checking by default.:de
-
-"let g:syntastic_mode_map = {
-"    \ "active_filetypes": ["c", "cpp"],
-"    \ "mode": "active",
-"    \ "passive_filetypes": []
-"\}
-
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -339,6 +156,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_sep = ' '
 let g:airline#extensions#tabline#right_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
@@ -347,36 +165,39 @@ let g:airline_theme= 'solarized'
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-" let g:airline#enable#syntastic=1
-"let g:airline#enable#bufferline=1
 
-" enable syntastic extension with airline
-" let g:airline#extensions#syntastic#enabled=1
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_key_list_accept_completion = ['<C-y>']
+let g:ycm_extra_conf_globlist=['~/.vim/*','~/workspaces/*']
+let g:ycm_error_symbol = '✗'
+let g:ycm_warning_symbol = "⚠"
+let g:ycm_always_populate_location_list = 0
+let g:ycm_auto_trigger=1
+let g:ycm_enable_diagnostic_highlighting=1
+let g:ycm_enable_diagnostic_signs=1
+let g:ycm_max_diagnostics_to_display=10000
+let g:ycm_min_num_identifier_candidate_chars=0
+let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_open_loclist_on_ycm_diags=1
+let g:ycm_show_diagnostics_ui=1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_filetype_blacklist = {
+  \ 'tagbar' : 1,
+  \ 'qf' : 1,
+  \ 'notes' : 1,
+  \ 'markdown' : 1,
+  \ 'unite' : 1,
+  \ 'text' : 1,
+  \ 'vimwiki' : 1,
+  \ 'pandoc' : 1,
+  \ 'infolog' : 1,
+  \ 'mail' : 1
+\}
 
-let g:airline#extensions#ale#error_symbol = 'E:'
-let g:airline#extensions#ale#warning_symbol = 'W:'
-
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_c_gcc_options = '-std=c99 -Wall -Wextra -Werror -pedantic -Wno-unused-function -Wno-unused-variable -DDART_ENABLE_ASSERTIONS -DDART_ENABLE_LOGGING -DDASH_ENABLE_PMEM -I./dart-impl/base/include -I./dart-impl/mpi/include -I./dart-impl/shmem/include -I./dart-if/include -I/home/kowalewski/opt/pmem/include -I/home/kowalewski/workspaces/googletest/googletest/include -I/opt/ohpc/pub/mpi/openmpi-gnu/1.10.4/include'
-let g:ale_cpp_gcc_options = '-I../googletest/googletest/include -I./dash/include -I./dart-impl/mpi/include -I./dart-impl/base/include -I./dart-if/include -I/home/kowalewski/opt/pmem/include -I/home/kowalewski/workspaces/googletest/googletest/include -std=c++11 -Wall -Wextra -Wno-unused-function -Wno-missing-braces -Wno-sign-compare -Wno-format -Wno-unused-parameter -Wno-unused-variable -DDASH_ENABLE_LOGGING -DDASH_ENABLE_TEST_LOGGING -DDART_ENABLE_ASSERTIONS -DDART_ENABLE_LOGGING -DDASH_ENABLE_PMEM -DMPI_IMPL_ID'
-
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-
-" call airline#parts#define_function('ALE', 'ALEGetStatusLine')
-"call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
-
-" let g:airline_section_error = airline#section#create_right(['ALE'])
-" let g:airline_section_error = '%{ALEGetStatusLine()}'
-
-"function! ALE() abort
-"    return exists('*ALEGetStatusLine') ? ALEGetStatusLine() : ''
-"endfunction
-"let g:airline_section_error = '%{ALE()}'
-
+" Dot not ask in this directories
 " ----------------------------------------------------------------------
 " | Automatic Commands                                                 |
 " ----------------------------------------------------------------------
@@ -428,7 +249,6 @@ if has("autocmd")
        autocmd FileType java setlocal noexpandtab
        autocmd FileType java setlocal list
        autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-       autocmd FileType java setlocal formatprg=par\ -w80\ -T4
        autocmd FileType ruby setlocal tabstop=2
        autocmd FileType ruby setlocal shiftwidth=2
        autocmd FileType ruby setlocal softtabstop=2
@@ -450,40 +270,19 @@ if has("autocmd")
 endif
 
 " ----------------------------------------------------------------------
-" | Helper Functions                                                   |
-" ----------------------------------------------------------------------
-
-function! StripTrailingWhitespaces()
-
-    " Save last search and cursor position.
-
-    let searchHistory = @/
-    let cursorLine = line(".")
-    let cursorColumn = col(".")
-
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    " Strip trailing whitespaces.
-
-    %s/\s\+$//e
-
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    " Restore previous search history and cursor position.
-
-    let @/ = searchHistory
-    call cursor(cursorLine, cursorColumn)
-
-
-endfunction
-
-" ----------------------------------------------------------------------
 " | Key Mappings                                                       |
 " ----------------------------------------------------------------------
+
+" " ================ Basic ============================
 
 " Use a different mapleader (default is "\").
 
 let mapleader = ","
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
@@ -493,6 +292,55 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" ================ Buffers, Tabs, Windows ============
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Quickly open a buffer for scribble
+map <leader>q :e ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>x :e ~/buffer.md<cr>
+
+" ================ Misc ============
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -505,12 +353,6 @@ nmap <leader>* :%s/\<<C-r><C-w>\>//<Left>
 " [,cs] Clear search.
 
 map <leader>cs <Esc>:noh<CR>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" [,l ] Toggle `set list`.
-
-nmap <leader>l :set list!<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -533,11 +375,6 @@ nmap <leader>v :vsp $MYVIMRC<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" [,v ] Make the opening of the `.vimrc` file easier.
-
-nmap <F4> :TagbarToggle <CR>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [,W ] Sudo write.
 
@@ -564,13 +401,61 @@ nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" [,+ ] / [,- ] Increase / Decrease contrast of solarized theme
+" [,.] / [,b] CtrlP Mappings
 nnoremap <space>. :CtrlPTag<CR>
 nnoremap <space>b :CtrlPBuffer<CR>
 
+" Go to definition of a function
+nmap <leader>gt :YcmCompleter GoTo<CR>
 
-map <F2> :ls<CR>:b<Space>
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" ----------------------------------------------------------------------
+" | Helper Functions                                                   |
+" ----------------------------------------------------------------------
+
+function! StripTrailingWhitespaces()
+
+    " Save last search and cursor position.
+
+    let searchHistory = @/
+    let cursorLine = line(".")
+    let cursorColumn = col(".")
+
+    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    " Strip trailing whitespaces.
+
+    %s/\s\+$//e
+
+    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    " Restore previous search history and cursor position.
+
+    let @/ = searchHistory
+    call cursor(cursorLine, cursorColumn)
+
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
 
 " ----------------------------------------------------------------------
 " | Local Settings                                                     |
