@@ -15,7 +15,7 @@ if [[ `uname` =~ ^CYGWIN_NT ]]; then
   # see https://github.com/sindresorhus/pure/issues/198
   ZSH_THEME="babun"
 else
-  PURE_PROMPT_SYMBOL="$"
+  PURE_PROMPT_SYMBOL="λ"
   ZSH_THEME="pure"
 fi
 
@@ -117,8 +117,12 @@ eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.256dark`
 #----------------------------------------------------------------------------------
 
 alias tmux='tmux -2'
-# do not share history between tmux windows
+# do not share history between tmux windows / panes
 unsetopt share_history
+
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
 
 # Bind Ctrl-U to backward-kill-line instead of the whole line
 bindkey \^U backward-kill-line

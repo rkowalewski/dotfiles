@@ -17,7 +17,8 @@ BASE_FLAGS = [
         '-std=c++14',
         '-xc++',
         '-I/usr/lib/',
-        '-I/usr/include/'
+        '-I/usr/include/',
+        '-I/home/kowalewski/opt/dash-0.3.0/include/'
         ]
 
 SOURCE_EXTENSIONS = [

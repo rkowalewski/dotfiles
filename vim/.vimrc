@@ -1,47 +1,53 @@
 set nocompatible " be iMproved
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle Configuration
+" => Vim-Plug Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/Vundle.vim
-call vundle#begin()
+runtime vim-plug/plug.vim
+
+call  plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plug 'VundleVim/Vundle.vim'
 
-" Plugin 'W0rp/ale'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'Kien/ctrlp.vim'
-Plugin 'Vim-airline/vim-airline'
-Plugin 'Vim-airline/vim-airline-themes'
-Plugin 'Chiel92/vim-autoformat'
-" Plugin 'Bling/vim-bufferline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Szw/vim-maximizer'
-Plugin 'Jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'lifepillar/vim-solarized8'
-" Plugin 'vim-syntastic/syntastic'
-Plugin 'flazz/vim-colorschemes'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'Kien/ctrlp.vim'
+Plug 'Vim-airline/vim-airline'
+Plug 'Vim-airline/vim-airline-themes'
+Plug 'Chiel92/vim-autoformat'
+" Plug 'Bling/vim-bufferline'
+Plug 'tpope/vim-fugitive'
+Plug 'Szw/vim-maximizer'
+Plug 'Jeffkreeftmeijer/vim-numbertoggle'
+"Plug 'lifepillar/vim-solarized8'
+Plug 'iCyMind/NeoSolarized'
+" Plug 'vim-syntastic/syntastic'
+"Plug 'neomake/neomake'
+Plug 'w0rp/ale'
+Plug 'flazz/vim-colorschemes'
+Plug 'embear/vim-localvimrc'
 
-if v:version > 741 && (has('python') || has('python3'))
-  Plugin 'Valloric/YouCompleteMe'
-  Plugin 'rdnetto/YCM-Generator'
+if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
+"  Plug 'Valloric/YouCompleteMe'
+"  Plug 'rdnetto/YCM-Generator'
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 endif
 
-" Plugin 'Christoomey/vim-tmux-navigator'
+" Plug 'Christoomey/vim-tmux-navigator'
 
 if v:version >= '704' && executable('ctags')
-  Plugin 'Ludovicchabant/vim-gutentags'
+  Plug 'Ludovicchabant/vim-gutentags'
 endif
 
 
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
+
 " Enable file type detection
 filetype on
 filetype plugin on
@@ -49,49 +55,10 @@ filetype indent on
 syntax on
 
 " Basic Settings
-source ~/.vim/basic.vim
-source ~/.vim/tmux.vim
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-
-
-set background=dark
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-  endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Solarzed Colorscheme
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !has("gui_running")
-  " let g:solarized_contrast = "high"
-  let g:solarized_termtrans = 0
-  " let g:solarized_visibility = "high"
-endif
-
-try
-  " See https://github.com/lifepillar/vim-solarized8
-  colorscheme solarized8_dark
-catch
-endtry
-
-fun! Solarized8Contrast(delta)
-  let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
-  exe "colors" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
-endf
-
-set background=dark
+runtime basic.vim
+runtime tmux.vim
+runtime ui.vim
+runtime syntax.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
@@ -105,7 +72,6 @@ set background=dark
   let g:syntastic_cpp_check_header = 1
   let g:syntastic_debug = 0
 
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim Clang Format
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,8 +131,11 @@ let g:airline_theme= 'solarized'
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
-" YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YCM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']

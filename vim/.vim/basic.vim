@@ -5,7 +5,8 @@
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
-set esckeys
+" esckeys does not work in Neovim
+" set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
@@ -14,7 +15,7 @@ set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
 set binary
 set eol
-" Automatically reload file if changed fron outside
+" Automatically reload file if changed from outside
 set autoread
 
 " Respect modeline in files
@@ -39,7 +40,8 @@ set list listchars=tab:▸\ ,trail:·,nbsp:_
 set laststatus=2
 " Enable mouse in all modes
 set mouse-=a
-set ttymouse=xterm2
+" ttymouse does not work in neovim
+"set ttymouse=xterm2
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 " Show the cursor position
@@ -133,11 +135,11 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " " ================ Folds ============================
 
 " Add a bit extra margin to the left
-set foldcolumn=1
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
+"set foldcolumn=1
+set foldmethod=indent "  fold based on indent
+set foldnestmax=3     "  deepest fold is 3 levels
 set foldenable        "fold by default
-set foldlevelstart=10   " open most folds by default
+set foldlevelstart=10 "   open most folds by default
 
 " ================ Scrolling ========================
 

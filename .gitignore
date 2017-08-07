@@ -3,3 +3,5 @@ tags
 tmp
 .notags
 vim/.vim/bundle/**
+vim/.vim/plugged
+vim/.vim/undo

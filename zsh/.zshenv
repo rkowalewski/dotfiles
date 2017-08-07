@@ -1,7 +1,5 @@
 typeset -U path
 
-typeset -U manpath
-
 path+="$HOME/bin"
 path+='/usr/local/bin'
 
@@ -27,7 +25,6 @@ path=("$DYNAMIC_COLORS_ROOT/bin" $path)
 path=($^path(N))
 export PATH
 
-manpath+=$HOME/opt/stdman/share/man
-typeset -U manpath
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 
 [[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local

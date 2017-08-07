@@ -17,8 +17,8 @@ function git_remove_submodule {
   if git submodule status "$submodule_name" >/dev/null 2>&1; then
     git submodule deinit -f "$submodule_name"
     git rm -f "$submodule_name"
+    rm -rf ".git/modules/$submodule_name"
 
-    git config -f .gitmodules --remove-section "submodule.$submodule_name"
     if [ -z "$(cat .gitmodules)" ]; then
       git rm -f .gitmodules
     else
