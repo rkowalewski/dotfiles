@@ -2,7 +2,7 @@
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("termguicolors") && has("nvim")
-  set termguicolors
+  "set termguicolors
 endif
 
 " Enable 256 colors palette in Gnome Terminal
@@ -29,7 +29,7 @@ try
 catch
 endtry
 
-set background=light
+set background=dark
 
 " default value is "normal", Setting this option to "high" or "low" does use the
 " same Solarized palette but simply shifts some values up or down in order to
