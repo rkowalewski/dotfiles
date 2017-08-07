@@ -17,12 +17,6 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Solarzed Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !has("gui_running")
-   "let g:solarized_contrast = high
-   "let g:solarized_termtrans = 0
-   "let g:solarized_visibility = high
-endif
-
 try
   " See https://github.com/lifepillar/vim-solarized8
   colorscheme NeoSolarized

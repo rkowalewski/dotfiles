@@ -27,7 +27,9 @@ Plug 'Jeffkreeftmeijer/vim-numbertoggle'
 Plug 'iCyMind/NeoSolarized'
 " Plug 'vim-syntastic/syntastic'
 "Plug 'neomake/neomake'
-Plug 'w0rp/ale'
+if (has('nvim') || (v:version > 800))
+  Plug 'w0rp/ale'
+endif
 Plug 'flazz/vim-colorschemes'
 Plug 'embear/vim-localvimrc'
 
