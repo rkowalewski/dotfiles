@@ -19,24 +19,24 @@ let g:ale_echo_msg_warning_str = '⚠ Warning'
 
 
 let g:ale_c_clang_options = '-std=c99
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dash/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dash/src
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-if/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/mpi/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/mpi/src
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/base/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/base/src
+      \ -I$HOME/workspaces/dash-project/dash-development/dash/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dash/src
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-if/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/src
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/src
       \ '
 
 let g:ale_cpp_clang_options = '-std=c++11
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dash/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dash/src
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-if/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/mpi/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/mpi/src
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/base/include
-      \ -I/home/kowalewski/workspaces/dash-project/dash-development/dart-impl/base/src
-      \ -I/home/kowalewski/workspaces/googletest/googletest/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dash/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dash/src
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-if/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/src
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/include
+      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/src
+      \ -I$HOME/workspaces/googletest/googletest/include
       \ '
 
 "let g:ale_open_list = 1
