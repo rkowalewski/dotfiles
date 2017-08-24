@@ -14,28 +14,40 @@ call  plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
 " Plug 'VundleVim/Vundle.vim'
 
+Plug 'dbakker/vim-projectroot'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Kien/ctrlp.vim'
 Plug 'Vim-airline/vim-airline'
 Plug 'Vim-airline/vim-airline-themes'
 Plug 'Chiel92/vim-autoformat'
-" Plug 'Bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
 Plug 'Jeffkreeftmeijer/vim-numbertoggle'
+Plug 'flazz/vim-colorschemes'
+"Plug 'widatama/vim-phoenix'
 "Plug 'lifepillar/vim-solarized8'
-Plug 'iCyMind/NeoSolarized'
-" Plug 'vim-syntastic/syntastic'
-"Plug 'neomake/neomake'
+Plug 'ryanpcmcquen/true-monochrome_vim'
+"Plug 'reedes/vim-colors-pencil'
+"Plug 'iCyMind/NeoSolarized'
+Plug 'embear/vim-localvimrc'
+
 if (has('nvim') || (v:version > 800))
   Plug 'w0rp/ale'
 endif
-Plug 'flazz/vim-colorschemes'
-Plug 'embear/vim-localvimrc'
 
 if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
-"  Plug 'Valloric/YouCompleteMe'
-"  Plug 'rdnetto/YCM-Generator'
+  function! BuildYCM(info)
+    " info is a dictionary with 3 fields
+    " - name:   name of the plugin
+    " - status: 'installed', 'updated', or 'unchanged'
+    " - force:  set on PlugInstall! or PlugUpdate!
+    if a:info.status == 'installed' || a:info.force
+      ! ./../install_ycm.sh
+    endif
+  endfunction
+
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 endif
 
@@ -59,13 +71,13 @@ syntax on
 " Basic Settings
 runtime basic.vim
 runtime tmux.vim
-runtime ui.vim
 runtime syntax.vim
+runtime ui.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "let g:syntastic_always_populate_loc_list = 0
+if exists('g:loaded_syntastic_plugin')
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
@@ -73,6 +85,7 @@ runtime syntax.vim
   let g:syntastic_c_check_header = 1
   let g:syntastic_cpp_check_header = 1
   let g:syntastic_debug = 0
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim Clang Format
@@ -138,37 +151,54 @@ let g:airline#extensions#ale#enabled = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YCM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" Disable YCM Linting, we only want auto completion
+let g:ycm_show_diagnostics_ui = 0
+
+let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-k>']
 let g:ycm_key_list_accept_completion = ['<C-y>']
-let g:ycm_extra_conf_globlist=['~/.vim/*','~/workspaces/*']
-let g:ycm_error_symbol = '✗'
-let g:ycm_warning_symbol = "⚠"
+
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_extra_conf_globlist=['~/.vim/*']
+
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = "<<"
 let g:ycm_always_populate_location_list = 0
 let g:ycm_auto_trigger=1
-let g:ycm_enable_diagnostic_highlighting=1
-let g:ycm_enable_diagnostic_signs=1
 let g:ycm_max_diagnostics_to_display=10000
 let g:ycm_min_num_identifier_candidate_chars=0
 let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_open_loclist_on_ycm_diags=1
-let g:ycm_show_diagnostics_ui=1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_filetype_blacklist = {
-  \ 'tagbar' : 1,
-  \ 'qf' : 1,
-  \ 'notes' : 1,
-  \ 'markdown' : 1,
-  \ 'unite' : 1,
-  \ 'text' : 1,
-  \ 'vimwiki' : 1,
-  \ 'pandoc' : 1,
-  \ 'infolog' : 1,
-  \ 'mail' : 1
-\}
 
-" Dot not ask in this directories
+let g:ycm_filetype_blacklist={
+      \ 'vim' : 1,
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'md' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'objc' : 1,
+      \ 'mail' : 1
+      \}
+
+nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
+nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
+nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
+nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => .lvimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Never ask if we want to load .lvimrc
+let g:localvimrc_ask = 0
+
 " ----------------------------------------------------------------------
 " | Automatic Commands                                                 |
 " ----------------------------------------------------------------------

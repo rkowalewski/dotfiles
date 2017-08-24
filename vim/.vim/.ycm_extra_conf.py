@@ -14,11 +14,10 @@ BASE_FLAGS = [
         '-fexceptions',
         '-ferror-limit=10000',
         '-DNDEBUG',
-        '-std=c++14',
+        '-std=c++1z',
         '-xc++',
         '-I/usr/lib/',
-        '-I/usr/include/',
-        '-I/home/kowalewski/opt/dash-0.3.0/include/'
+        '-I/usr/include/'
         ]
 
 SOURCE_EXTENSIONS = [

@@ -17,29 +17,9 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = '✹ Error'
 let g:ale_echo_msg_warning_str = '⚠ Warning'
 
+let g:ale_c_clang_options = ''
+let g:ale_cpp_clang_options = ''
 
-let g:ale_c_clang_options = '-std=c99
-      \ -I$HOME/workspaces/dash-project/dash-development/dash/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dash/src
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-if/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/src
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/src
-      \ '
-
-let g:ale_cpp_clang_options = '-std=c++11
-      \ -I$HOME/workspaces/dash-project/dash-development/dash/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dash/src
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-if/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/mpi/src
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/include
-      \ -I$HOME/workspaces/dash-project/dash-development/dart-impl/base/src
-      \ -I$HOME/workspaces/googletest/googletest/include
-      \ '
-
-"let g:ale_open_list = 1
 
 "Solessly stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim
 
