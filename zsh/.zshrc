@@ -69,6 +69,16 @@ plugins=(git gitfast solarized-man colorize common-aliases tmux zsh-256color ssh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Load Supercomputing Environment Modules
+if [[ -f "/etc/profile.d/modules.sh" ]]; then
+  source /etc/profile.d/modules.sh
+
+  if [[ -n "$(module avail |& grep -o git)" ]]; then
+    # Load git if available
+    module load git
+  fi
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8

@@ -19,7 +19,6 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Kien/ctrlp.vim'
 Plug 'Vim-airline/vim-airline'
 Plug 'Vim-airline/vim-airline-themes'
-Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
 Plug 'Jeffkreeftmeijer/vim-numbertoggle'
@@ -47,8 +46,8 @@ if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
   endfunction
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+  Plug 'Chiel92/vim-autoformat'
 endif
 
 " Plug 'Christoomey/vim-tmux-navigator'
