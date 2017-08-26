@@ -1,13 +1,13 @@
-Columns=150
-Rows=55
-Font=DejaVu Sans Mono for Powerline
-FontHeight=10
+Columns=237
+Rows=74
+Font=Terminus (TTF) for Windows
+FontHeight=12
 BoldAsFont=no
 BoldAsColour=no
 Charset=UTF-8
 Locale=en_US
 Transparency=off
-FontSmoothing=Default
+FontSmoothing=none
 ForegroundColour=160,160,160
 BackgroundColour=27,29,30
 CursorColour=160,160,160
@@ -30,3 +30,6 @@ BoldWhite=248,248,242
 OpaqueWhenFocused=no
 AltFnShortcuts=yes
 
+CursorType=block
+CursorBlinks=no
+FontWeight=500
