@@ -2,7 +2,7 @@
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("termguicolors") && has("nvim")
-  "set termguicolors
+"  set termguicolors
 endif
 
 " Enable 256 colors palette in Gnome Terminal
@@ -17,12 +17,10 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Solarzed Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark
-
-"try
+try
   colorscheme 256_noir
-"catch
-"endtry
+catch
+endtry
 
 " prevent CursorLine underlined
 hi CursorLine cterm=NONE

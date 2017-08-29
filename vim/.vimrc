@@ -14,6 +14,15 @@ call  plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
 " Plug 'VundleVim/Vundle.vim'
 
+Plug 'ryanpcmcquen/true-monochrome_vim'
+Plug 'andreasvc/vim-256noir'
+Plug 'fxn/vim-monochrome'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'widatama/vim-phoenix'
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'reedes/vim-colors-pencil'
+"Plug 'iCyMind/NeoSolarized'
+
 Plug 'dbakker/vim-projectroot'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Kien/ctrlp.vim'
@@ -22,12 +31,6 @@ Plug 'Vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
 Plug 'Jeffkreeftmeijer/vim-numbertoggle'
-Plug 'flazz/vim-colorschemes'
-"Plug 'widatama/vim-phoenix'
-"Plug 'lifepillar/vim-solarized8'
-Plug 'ryanpcmcquen/true-monochrome_vim'
-"Plug 'reedes/vim-colors-pencil'
-"Plug 'iCyMind/NeoSolarized'
 Plug 'embear/vim-localvimrc'
 
 if (has('nvim') || (v:version > 800))
@@ -72,6 +75,25 @@ runtime basic.vim
 runtime tmux.vim
 runtime syntax.vim
 runtime ui.vim
+
+"Fix for Win32Yank Problem in Windows
+"See https://github.com/neovim/neovim/issues/7021
+"See https://github.com/neovim/neovim/issues/7031
+"See $HOME/opt/bin/win32yank
+"if !empty(matchstr(system("uname -a"), "microsoft"))
+"   let g:clipboard = {
+"       \ 'name': 'win32yank',
+"       \ 'copy': {
+"       \   '+': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -i --crlf',
+"       \   '*': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -i --crlf',
+"       \   },
+"       \ 'paste': {
+"       \   '+': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -o --lf',
+"       \   '*': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -o --lf',
+"       \   },
+"       \ 'cache_enabled': 1,
+"       \ }
+"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
@@ -214,6 +236,12 @@ if has("autocmd")
     augroup auto_reload_vim_configs
         autocmd!
         autocmd BufWritePost $MYVIMRC so $MYVIMRC
+    augroup END
+
+
+    augroup qf
+        autocmd!
+        autocmd FileType qf set nobuflisted
     augroup END
 
     " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
