@@ -44,7 +44,7 @@ if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
     " - status: 'installed', 'updated', or 'unchanged'
     " - force:  set on PlugInstall! or PlugUpdate!
     if a:info.status == 'installed' || a:info.force
-      ! ./../install_ycm.sh
+      "! ./../install_ycm.sh
     endif
   endfunction
 
