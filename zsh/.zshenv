@@ -14,12 +14,15 @@ path=('/opt/vim/bin' $path)
 # append path
 path=("$HOME/opt/bin" $path)
 
+
 #dynamic colors
 [ -z "${DYNAMIC_COLORS_ROOT}" ] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
 
 export DYNAMIC_COLORS_ROOT
 
 path=("$DYNAMIC_COLORS_ROOT/bin" $path)
+
+path=("$HOME/opt/bin" $path)
 
 # add only those paths which really exist and finally export it
 path=($^path(N))

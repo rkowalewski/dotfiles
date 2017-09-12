@@ -129,7 +129,7 @@ alias tmux='tmux -2'
 # do not share history between tmux windows / panes
 unsetopt share_history
 
-if type nvim > /dev/null 2>&1; then
+if [[ ! `uname` =~ ^CYGWIN_NT ]] && type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 
