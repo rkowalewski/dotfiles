@@ -8,21 +8,16 @@ set nocompatible " be iMproved
 runtime vim-plug/plug.vim
 
 call  plug#begin('~/.vim/plugged')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-" Plug 'VundleVim/Vundle.vim'
-
-Plug 'ryanpcmcquen/true-monochrome_vim'
-Plug 'andreasvc/vim-256noir'
-Plug 'fxn/vim-monochrome'
-"Plug 'flazz/vim-colorschemes'
+Plug 'vim-scripts/true-monochrome'
+"Plug 'andreasvc/vim-256noir'
+"Plug 'fxn/vim-monochrome'
+Plug 'flazz/vim-colorschemes'
 "Plug 'widatama/vim-phoenix'
 "Plug 'lifepillar/vim-solarized8'
-"Plug 'reedes/vim-colors-pencil'
+Plug 'reedes/vim-colors-pencil'
 "Plug 'iCyMind/NeoSolarized'
-
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'dbakker/vim-projectroot'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Kien/ctrlp.vim'
@@ -32,12 +27,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
 Plug 'Jeffkreeftmeijer/vim-numbertoggle'
 Plug 'embear/vim-localvimrc'
+Plug 'Chiel92/vim-autoformat'
+" Plug 'Christoomey/vim-tmux-navigator'
 
-if (has('nvim') || (v:version > 800))
-  Plug 'w0rp/ale'
+if v:version >= '704' && executable('ctags')
+  Plug 'Ludovicchabant/vim-gutentags'
 endif
 
-if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
+if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && executable('clang')
   function! BuildYCM(info)
     " info is a dictionary with 3 fields
     " - name:   name of the plugin
@@ -50,16 +47,8 @@ if (v:version > 741 || has('nvim')) && (has('python') || has('python3'))
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-  Plug 'Chiel92/vim-autoformat'
+  Plug 'w0rp/ale'
 endif
-
-" Plug 'Christoomey/vim-tmux-navigator'
-
-if v:version >= '704' && executable('ctags')
-  Plug 'Ludovicchabant/vim-gutentags'
-endif
-
-
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -163,7 +152,8 @@ let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
-let g:airline_theme= 'solarized'
+" see ui.vim
+"let g:airline_theme= 'solarized'
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
@@ -242,6 +232,17 @@ if has("autocmd")
     augroup qf
         autocmd!
         autocmd FileType qf set nobuflisted
+    augroup END
+
+    augroup tex
+        autocmd!
+        autocmd FileType tex setlocal tw=78|setlocal spell spelllang=en_us
+    augroup END
+
+    augroup colors
+        autocmd!
+        "autocmd FileType * colorscheme solarized|set background=dark
+        "autocmd FileType c,cpp colorscheme 256_noir
     augroup END
 
     " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -329,7 +330,7 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " ================ Buffers, Tabs, Windows ============
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <silent> <leader>bd :Bclose<cr>:hide<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>

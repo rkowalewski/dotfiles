@@ -30,8 +30,6 @@ set secure
 set number
 " Enable syntax highlighting
 syntax on
-" Highlight current line
-set cursorline
 
 " Show “invisible” characters
 set list listchars=tab:▸\ ,trail:·,nbsp:_

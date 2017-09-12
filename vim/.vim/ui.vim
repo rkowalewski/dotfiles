@@ -2,12 +2,7 @@
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("termguicolors") && has("nvim")
-"  set termguicolors
-endif
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
+  set termguicolors
 endif
 
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -17,13 +12,22 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Solarzed Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 try
-  colorscheme 256_noir
+  colorscheme true-monochrome
 catch
 endtry
 
+set background=dark
+let g:airline_theme= 'monochrome'
+
+" Highlight current line
+"set cursorline
+set nocursorline
+
 " prevent CursorLine underlined
-hi CursorLine cterm=NONE
+" hi CursorLine cterm=NONE
 
 " default value is "normal", Setting this option to "high" or "low" does use the
 " same Solarized palette but simply shifts some values up or down in order to
