@@ -116,7 +116,10 @@ export EDITOR=vim
 # source all files from custom zsh aliases
 
 
-for file in $DOTFILES/zsh/scripts/**/*(.); source $file
+for file in $DOTFILES/zsh/scripts/**/*;
+do
+  source $file
+done
 
 [[ -z "${SSH_CONNECTION}"  && -z "${TMUX}" \
   && -n "$(type dynamic-colors)" ]] && dynamic-colors init
