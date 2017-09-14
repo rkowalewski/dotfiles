@@ -22,7 +22,14 @@ git submodule update --init --recursive
 
 BUILD_DIR="$(mktemp -d /tmp/build_ycm.XXXX)"
 
-CLANG_LIB="$(dirname $(which clang))/../lib/libclang.so"
+CLANG_LIB="$(clang --version | tail -n 1 | cut -d ':' -f 2 | xargs -L1 echo)/../lib/libclang.so"
+
+if [ ! -f $CLANG_LIB ];
+then
+  echo "cannot find clang"
+  exit 1
+fi
+
 
 # Generate Makefiles
 cd $BUILD_DIR
