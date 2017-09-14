@@ -9,10 +9,10 @@ runtime vim-plug/plug.vim
 
 call  plug#begin('~/.vim/plugged')
 
-Plug 'vim-scripts/true-monochrome'
+"Plug 'vim-scripts/true-monochrome'
 "Plug 'andreasvc/vim-256noir'
-"Plug 'fxn/vim-monochrome'
-Plug 'flazz/vim-colorschemes'
+Plug 'fxn/vim-monochrome'
+"Plug 'flazz/vim-colorschemes'
 "Plug 'widatama/vim-phoenix'
 "Plug 'lifepillar/vim-solarized8'
 Plug 'reedes/vim-colors-pencil'
@@ -25,10 +25,11 @@ Plug 'Vim-airline/vim-airline'
 Plug 'Vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
-Plug 'Jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'embear/vim-localvimrc'
 Plug 'Chiel92/vim-autoformat'
-" Plug 'Christoomey/vim-tmux-navigator'
+Plug 'romainl/vim-qf'
+Plug 'Christoomey/vim-tmux-navigator'
 
 if v:version >= '704' && executable('ctags')
   Plug 'Ludovicchabant/vim-gutentags'
@@ -46,8 +47,8 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
   endfunction
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-  Plug 'w0rp/ale'
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable', 'frozen' : 1 }
+  Plug 'w0rp/ale', { 'frozen' : 1 }
 endif
 
 " All of your Plugins must be added before the following line
@@ -61,7 +62,7 @@ syntax on
 
 " Basic Settings
 runtime basic.vim
-runtime tmux.vim
+" runtime tmux.vim
 runtime syntax.vim
 runtime ui.vim
 
@@ -330,7 +331,7 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " ================ Buffers, Tabs, Windows ============
 
 " Close the current buffer
-map <silent> <leader>bd :Bclose<cr>:hide<cr>
+map <silent> <leader>bd :bdelete:hide<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -386,8 +387,7 @@ map <leader>cs <Esc>:noh<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [,n ] Toggle `set relativenumber`.
-
-let g:NumberToggleTrigger="<leader>n"
+nnoremap <silent><leader>n :set relativenumber!<cr>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -485,6 +485,15 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+"function! ConfirmQuit()
+"    lcl
+"    quit
+"endfunction
+"
+"cnoremap <silent> q<cr>  call ConfirmQuit()<cr>
+"cnoremap <silent> wq<cr> call ConfirmQuit()<cr>
+"cnoremap <silent> x<cr> call ConfirmQuit()<cr>
 
 " ----------------------------------------------------------------------
 " | Local Settings                                                     |
