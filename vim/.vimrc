@@ -1,22 +1,18 @@
 set nocompatible " be iMproved
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim-Plug Configuration
+" => Plug Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set the runtime path to include Vundle and initialize
+" set the runtime path to include Plug and initialize
 runtime vim-plug/plug.vim
 
 call  plug#begin('~/.vim/plugged')
 
-"Plug 'vim-scripts/true-monochrome'
-"Plug 'andreasvc/vim-256noir'
 Plug 'fxn/vim-monochrome'
-"Plug 'flazz/vim-colorschemes'
-"Plug 'widatama/vim-phoenix'
-"Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'reedes/vim-colors-pencil'
-"Plug 'iCyMind/NeoSolarized'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'dbakker/vim-projectroot'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -31,7 +27,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'romainl/vim-qf'
 Plug 'Christoomey/vim-tmux-navigator'
 
-if v:version >= '704' && executable('ctags')
+if ((v:version >= '704' || has('nvim')) && executable('ctags'))
   Plug 'Ludovicchabant/vim-gutentags'
 endif
 
@@ -42,12 +38,12 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     " - status: 'installed', 'updated', or 'unchanged'
     " - force:  set on PlugInstall! or PlugUpdate!
     if a:info.status == 'installed' || a:info.force
-      "! ./../install_ycm.sh
+      ! sh $DOTFILES/contrib/install_ycm.sh
     endif
   endfunction
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable', 'frozen' : 1 }
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
   Plug 'w0rp/ale', { 'frozen' : 1 }
 endif
 
@@ -113,7 +109,6 @@ let g:gutentags_exclude_project_root = []
 call add(g:gutentags_exclude_project_root, $DOTFILES)
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => The silver seacher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -135,10 +130,6 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !exists('g:airline_symbols')
-    "let g:airline_symbols = {}
-endif
-
 let g:airline_powerline_fonts = 1
 
 let g:airline#extensions#tabline#enabled = 2
@@ -216,87 +207,88 @@ let g:localvimrc_ask = 0
 " ----------------------------------------------------------------------
 
 if has("autocmd")
-    " Autocommand Groups.
-    " http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+  " Autocommand Groups.
+  " http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
 
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    " Automatically reload the configurations from
-    " the `~/.vimrc` file whenever they are changed.
+  " Automatically reload the configurations from
+  " the `~/.vimrc` file whenever they are changed.
 
-    augroup auto_reload_vim_configs
-        autocmd!
-        autocmd BufWritePost $MYVIMRC so $MYVIMRC
-    augroup END
+  augroup auto_reload_vim_configs
+    autocmd!
+    autocmd BufWritePost $MYVIMRC so $MYVIMRC
+  augroup END
 
 
-    augroup qf
-        autocmd!
-        autocmd FileType qf set nobuflisted
-    augroup END
+  " Ignore quickfix windows in buffer list
+  augroup ignore_buf_list
+    autocmd!
+    autocmd FileType qf set nobuflisted
+  augroup END
 
-    augroup tex
-        autocmd!
-        autocmd FileType tex setlocal tw=78|setlocal spell spelllang=en_us
-    augroup END
+  augroup tex
+    autocmd!
+    autocmd FileType tex setlocal tw=78|setlocal spell spelllang=en_us
+  augroup END
 
-    augroup colors
-        autocmd!
-        "autocmd FileType * colorscheme solarized|set background=dark
-        "autocmd FileType c,cpp colorscheme 256_noir
-    augroup END
+  augroup colors
+    autocmd!
+    "autocmd FileType * colorscheme solarized|set background=dark
+    autocmd FileType c,cpp colorscheme monochrome|let g:airline_theme= 'monochrome'
+  augroup END
 
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    " Automatically strip the trailing
-    " whitespaces when files are saved.
+  " Automatically strip the trailing
+  " whitespaces when files are saved.
 
-    augroup strip_trailing_whitespaces
+  augroup strip_trailing_whitespaces
 
-        " List of file types that use the trailing whitespaces:
-        "
-        "  * Markdown
-        "    https://daringfireball.net/projects/markdown/syntax#block
+    " List of file types that use the trailing whitespaces:
+    "
+    "  * Markdown
+    "    https://daringfireball.net/projects/markdown/syntax#block
 
-        let excludedFileTypes = [
-            \ "markdown",
-            \ "mkd.markdown"
-        \]
+    let excludedFileTypes = [
+          \ "markdown",
+          \ "mkd.markdown"
+          \]
 
-        " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        " Only strip the trailing whitespaces if
-        " the file type is not in the excluded list.
+    " Only strip the trailing whitespaces if
+    " the file type is not in the excluded list.
 
-        autocmd!
-        autocmd BufWritePre * if index(excludedFileTypes, &ft) < 0 | :call StripTrailingWhitespaces()
+    autocmd!
+    autocmd BufWritePre * if index(excludedFileTypes, &ft) < 0 | :call StripTrailingWhitespaces()
 
-    augroup END
+  augroup END
 
-    augroup configgroup
-      autocmd!
-       autocmd VimEnter * highlight clear SignColumn
-       autocmd FileType java setlocal noexpandtab
-       autocmd FileType java setlocal list
-       autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-       autocmd FileType ruby setlocal tabstop=2
-       autocmd FileType ruby setlocal shiftwidth=2
-       autocmd FileType ruby setlocal softtabstop=2
-       autocmd FileType ruby setlocal commentstring=#\ %s
-       autocmd FileType python setlocal commentstring=#\ %s
-       autocmd BufEnter *.cls setlocal filetype=java
-       autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-       autocmd BufEnter Makefile setlocal noexpandtab
-       autocmd BufEnter *.sh setlocal tabstop=2
-       autocmd BufEnter *.sh setlocal shiftwidth=2
-       autocmd BufEnter *.sh setlocal softtabstop=2
-       " Treat .json files as .js
-       autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-       " Treat .md files as Markdown
-       autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-       " Treat .tex files as tex
-       autocmd BufRead,BufNewFile *.tex set filetype=tex
-    augroup END
+  augroup configgroup
+    autocmd!
+    autocmd VimEnter * highlight clear SignColumn
+    autocmd FileType java setlocal noexpandtab
+    autocmd FileType java setlocal list
+    autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal commentstring=#\ %s
+    autocmd FileType python setlocal commentstring=#\ %s
+    autocmd BufEnter *.cls setlocal filetype=java
+    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+    autocmd BufEnter Makefile setlocal noexpandtab
+    autocmd BufEnter *.sh setlocal tabstop=2
+    autocmd BufEnter *.sh setlocal shiftwidth=2
+    autocmd BufEnter *.sh setlocal softtabstop=2
+    " Treat .json files as .js
+    autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+    " Treat .md files as Markdown
+    autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    " Treat .tex files as tex
+    autocmd BufRead,BufNewFile *.tex set filetype=tex
+  augroup END
 endif
 
 " ----------------------------------------------------------------------
@@ -331,7 +323,7 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " ================ Buffers, Tabs, Windows ============
 
 " Close the current buffer
-map <silent> <leader>bd :bdelete:hide<cr>
+map <silent> <leader>bd :Bclose<CR>:hide<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -418,9 +410,9 @@ map <leader>cf :Autoformat<CR>
 
 " [,B ] switch betweeen dark and light color schemes
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
-  \ ? substitute(g:colors_name, 'dark', 'light', '')
-  \ : substitute(g:colors_name, 'light', 'dark', '')
-  \ )<cr>
+      \ ? substitute(g:colors_name, 'dark', 'light', '')
+      \ : substitute(g:colors_name, 'light', 'dark', '')
+      \ )<cr>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -443,47 +435,56 @@ nmap <leader>gt :YcmCompleter GoTo<CR>
 
 function! StripTrailingWhitespaces()
 
-    " Save last search and cursor position.
+  " Save last search and cursor position.
 
-    let searchHistory = @/
-    let cursorLine = line(".")
-    let cursorColumn = col(".")
+  let searchHistory = @/
+  let cursorLine = line(".")
+  let cursorColumn = col(".")
 
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    " Strip trailing whitespaces.
+  " Strip trailing whitespaces.
 
-    %s/\s\+$//e
+  %s/\s\+$//e
 
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    " Restore previous search history and cursor position.
+  " Restore previous search history and cursor position.
 
-    let @/ = searchHistory
-    call cursor(cursorLine, cursorColumn)
+  let @/ = searchHistory
+  call cursor(cursorLine, cursorColumn)
 
+endfunction
+
+function! ChangeTheme(theme)
+  "colorscheme a:theme
+
+  let g:airline_theme = "" . a:theme
+  if exists(':AirlineRefresh') " check if the plugin is loaded
+    :AirlineRefresh
+  endif
 endfunction
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 
 function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
 endfunction
 
 "function! ConfirmQuit()
@@ -506,5 +507,5 @@ endfunction
 "     by the local ones.
 
 if filereadable(glob("~/.vimrc.local"))
-    source ~/.vimrc.local
+  source ~/.vimrc.local
 endif

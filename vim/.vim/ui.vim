@@ -15,10 +15,10 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 
 " Always set background before colorscheme
 set background=dark
-let g:airline_theme= 'monochrome'
+let g:airline_theme= 'gruvbox'
 
 try
-  colorscheme monochrome
+  colorscheme gruvbox
 catch
 endtry
 
