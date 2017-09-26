@@ -21,5 +21,10 @@
 [include]
   path = ~/.gitconfig.user
 [mergetool "diffconflicts"]
-  cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
-  trustExitCode = true
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false
+[push]
+  default = current
+[merge]
+	tool = diffconflicts
