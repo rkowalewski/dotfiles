@@ -24,7 +24,7 @@ let g:ale_open_list = 1
 let g:ale_set_quickfix = 1
 
 
-"Solessly stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim
+"Shamelessly stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim
 
 " For a more fancy ale statusline
 function! ALEGetError()

@@ -10,11 +10,11 @@ runtime vim-plug/plug.vim
 call  plug#begin('~/.vim/plugged')
 
 Plug 'fxn/vim-monochrome'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'reedes/vim-colors-pencil'
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'dbakker/vim-projectroot'
+Plug 'blueshirts/darcula'
+Plug 'pbrisbin/vim-colors-off'
+Plug 'morhetz/gruvbox' " Gruvbox Theme
+Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
+Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Kien/ctrlp.vim'
 Plug 'Vim-airline/vim-airline'
@@ -44,7 +44,7 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-  Plug 'w0rp/ale', { 'tag' : 'v1.4.1' }
+  Plug 'w0rp/ale', { 'tag' : 'v1.5.2' }
 endif
 
 " All of your Plugins must be added before the following line
@@ -57,10 +57,10 @@ filetype indent on
 syntax on
 
 " Basic Settings
-runtime basic.vim
-" runtime tmux.vim
-runtime syntax.vim
-runtime ui.vim
+source $HOME/.vim/basic.vim
+" source $HOME/.vim/tmux.vim
+source $HOME/.vim/syntax.vim
+source $HOME/.vim/ui.vim
 
 "Fix for Win32Yank Problem in Windows
 "See https://github.com/neovim/neovim/issues/7021
@@ -144,8 +144,6 @@ let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
-" see ui.vim
-"let g:airline_theme= 'solarized'
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
@@ -220,7 +218,6 @@ if has("autocmd")
     autocmd BufWritePost $MYVIMRC so $MYVIMRC
   augroup END
 
-
   " Ignore quickfix windows in buffer list
   augroup ignore_buf_list
     autocmd!
@@ -230,12 +227,6 @@ if has("autocmd")
   augroup tex
     autocmd!
     autocmd FileType tex setlocal tw=78|setlocal spell spelllang=en_us
-  augroup END
-
-  augroup colors
-    autocmd!
-    "autocmd FileType * colorscheme solarized|set background=dark
-    autocmd FileType c,cpp colorscheme monochrome|let g:airline_theme= 'monochrome'
   augroup END
 
   " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -408,26 +399,14 @@ map <leader>W :w !sudo tee %<CR>
 map <leader>cf :Autoformat<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" [,B ] switch betweeen dark and light color schemes
-nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
-      \ ? substitute(g:colors_name, 'dark', 'light', '')
-      \ : substitute(g:colors_name, 'light', 'dark', '')
-      \ )<cr>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" [,+ ] / [,- ] Increase / Decrease contrast of solarized theme
-nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
-nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 " [,.] / [,b] CtrlP Mappings
 nnoremap <space>. :CtrlPTag<CR>
 nnoremap <space>b :CtrlPBuffer<CR>
 
 " Go to definition of a function
 nmap <leader>gt :YcmCompleter GoTo<CR>
+" toggle colors to optimize based on light or dark background
+nnoremap <leader>c :call ToggleLightDark()<CR>
 
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |

@@ -10,22 +10,51 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Solarzed Colorscheme
+" => Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! Light()
+    echom "set bg=light"
+    set bg=light
+    colorscheme off
+    set nocursorline
+    let g:airline_theme='light'
+    AirlineRefresh
+    " set list
+endfunction
+
+function! Dark()
+    echom "set bg=dark"
+    set background=dark
+    let g:airline_theme='monochrome'
+    colorscheme monochrome
+    set cursorline
+    AirlineRefresh
+    " darcula fix to hide the indents:
+    " set nolist
+endfunction
+
+function! ToggleLightDark()
+  if &bg ==# "light"
+    call Dark()
+  else
+    call Light()
+  endif
+endfunction
 
 " Always set background before colorscheme
 set background=dark
-let g:airline_theme= 'gruvbox'
+let g:airline_theme= 'monochrome'
 
 try
-  colorscheme gruvbox
+  colorscheme monochrome
 catch
 endtry
 
 
+
 " Highlight current line
 "set cursorline
-set nocursorline
+" set nocursorline
 
 " prevent CursorLine underlined
 " hi CursorLine cterm=NONE
