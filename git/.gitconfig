@@ -12,6 +12,12 @@
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  dr  = "!f() { git diff "$1"^.."$1"; }; f"
+  lc  = "!f() { git ll "$1"^.."$1"; }; f"
+  diffr  = "!f() { git diff "$1"^.."$1"; }; f"
 [merge]
   #tool = diffconflicts
  # conflictstyle = diff3
@@ -28,3 +34,5 @@
   default = current
 [merge]
 	tool = diffconflicts
+[core]
+	excludesfile = .lvimrc
