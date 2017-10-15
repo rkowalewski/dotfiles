@@ -5,7 +5,7 @@ if has("termguicolors") && has("nvim")
   set termguicolors
 endif
 
-set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+" set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
 
 
@@ -15,8 +15,8 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 function! Light()
     echom "set bg=light"
     set bg=light
-    colorscheme off
-    set nocursorline
+    "colorscheme off
+    "set nocursorline
     let g:airline_theme='light'
     AirlineRefresh
     " set list
@@ -26,8 +26,8 @@ function! Dark()
     echom "set bg=dark"
     set background=dark
     let g:airline_theme='monochrome'
-    colorscheme monochrome
-    set cursorline
+    "colorscheme monochrome
+    "set cursorline
     AirlineRefresh
     " darcula fix to hide the indents:
     " set nolist
@@ -46,7 +46,7 @@ set background=dark
 let g:airline_theme= 'monochrome'
 
 try
-  colorscheme monochrome
+  colorscheme off
 catch
 endtry
 

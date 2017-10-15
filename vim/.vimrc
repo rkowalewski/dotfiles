@@ -10,8 +10,9 @@ runtime vim-plug/plug.vim
 call  plug#begin('~/.vim/plugged')
 
 Plug 'fxn/vim-monochrome'
+"Plug 'pbrisbin/vim-colors-off'
+Plug 'rkowalewski/vim-colors-off'
 Plug 'blueshirts/darcula'
-Plug 'pbrisbin/vim-colors-off'
 Plug 'morhetz/gruvbox' " Gruvbox Theme
 Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
 Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
@@ -26,6 +27,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'romainl/vim-qf'
 Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
 Plug 'Christoomey/vim-tmux-navigator'
 
 if ((v:version >= '704' || has('nvim')) && executable('ctags'))

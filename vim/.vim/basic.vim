@@ -13,7 +13,7 @@ set whichwrap+=<,>,h,l
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
-set binary
+" set binary
 set eol
 " Automatically reload file if changed from outside
 set autoread
@@ -96,7 +96,9 @@ set lazyredraw
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
-set tw=500
+set tw=79
+set formatoptions=qrn1
+"set colorcolumn=85
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Indentation
