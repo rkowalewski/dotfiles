@@ -47,7 +47,7 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
 
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-  Plug 'w0rp/ale', { 'tag' : 'v1.' }
+  Plug 'w0rp/ale'
 endif
 
 " All of your Plugins must be added before the following line
