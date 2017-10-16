@@ -18,9 +18,6 @@
   dr  = "!f() { git diff "$1"^.."$1"; }; f"
   lc  = "!f() { git ll "$1"^.."$1"; }; f"
   diffr  = "!f() { git diff "$1"^.."$1"; }; f"
-[merge]
-  #tool = diffconflicts
- # conflictstyle = diff3
 [mergetool]
   prompt = false
   keepBackup = false
