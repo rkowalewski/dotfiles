@@ -22,9 +22,7 @@ Plug 'Vim-airline/vim-airline'
 Plug 'Vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'Szw/vim-maximizer'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'embear/vim-localvimrc'
-Plug 'Chiel92/vim-autoformat'
 Plug 'romainl/vim-qf'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
@@ -32,6 +30,8 @@ Plug 'Christoomey/vim-tmux-navigator'
 
 if ((v:version >= '704' || has('nvim')) && executable('ctags'))
   Plug 'Ludovicchabant/vim-gutentags'
+  Plug 'Chiel92/vim-autoformat'
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
 endif
 
 if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && executable('clang')
