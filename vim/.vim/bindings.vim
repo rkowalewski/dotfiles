@@ -4,9 +4,6 @@
 
 " " ================ Basic ============================
 
-" Use a different mapleader (default is "\").
-
-let mapleader = ","
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
@@ -36,13 +33,6 @@ nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 
 " ================ Buffers, Tabs, Windows ============
-
-" Close the current buffer
-map <silent> <leader>bd :Bclose<CR>:hide<cr>
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
 

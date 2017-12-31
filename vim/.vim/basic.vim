@@ -10,11 +10,19 @@ set wildmenu
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
+
+if &encoding != 'utf-8'
+    set encoding=utf-8              "Necessary to show Unicode glyphs
+endif
+
+" Use a different mapleader (default is "\").
+let mapleader = ","
+
 " Don’t add empty newlines at the end of files
 " set binary
-set eol
+" set eol
+set fixeol " Fix end of line if missing
+
 " Automatically reload file if changed from outside
 set autoread
 
@@ -28,8 +36,6 @@ set secure
 
 " Enable line numbers
 set number
-" Enable syntax highlighting
-syntax on
 
 " Show “invisible” characters
 set list listchars=tab:▸\ ,trail:·,nbsp:_
@@ -38,16 +44,14 @@ set list listchars=tab:▸\ ,trail:·,nbsp:_
 set laststatus=2
 " Enable mouse in all modes
 set mouse-=a
-" ttymouse does not work in neovim
-"set ttymouse=xterm2
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 " Show the cursor position
 set ruler
 " Don’t show the intro message when starting Vim
 set shortmess=atI
-" Show the current mode
-set showmode
+" Do not show the mode --> Airlines handles it
+set noshowmode
 " Show the filename in the window titlebar
 set title
 " Show the (partial) command as it’s being typed
@@ -69,14 +73,18 @@ set magic
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=500
+
+" The time in milliseconds that is waited for a mapped sequence to complete
+set timeoutlen=500
 
 " Show matching brackets when text indicator is over them
 set showmatch
 " How many tenths of a second to blink when matching brackets
-set mat=2
+set matchtime=2
 
-" Ignore compiled files
+" A file that matches with one of these patterns is ignored when expanding
+" wildcards, completing file or directory names, and influences the result of
+" |expand()|, |glob()| and |globpath()| unless a flag is passed to disable this
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
   set wildignore+=.git\*,.hg\*,.svn\*
@@ -87,18 +95,20 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Performance
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set ttyfast
-" Do not redraw while executing macros
-set lazyredraw
+if (!has('nvim'))
+  "Assume fast terminal in VIM
+  set ttyfast
+  " Do not redraw while executing macros
+  set lazyredraw
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Line breaks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wrap       "Don't wrap lines
+set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 set tw=79
-set formatoptions=qrn1
-"set colorcolumn=85
+set colorcolumn=85
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Indentation
@@ -107,21 +117,55 @@ set autoindent
 set smartindent
 set smarttab
 " 1 tab == 2 spaces
-set tabstop=2                  " ┐
-set softtabstop=2              " │ Set global <TAB> settings.
-set shiftwidth=2               " │
+set tabstop=4                  " ┐
+set softtabstop=4              " │ Set global <TAB> settings.
+set shiftwidth=4               " │
 set expandtab                  " ┘
+
+if has('autocmd')
+  augroup configgroup
+    autocmd!
+    autocmd VimEnter * highlight clear SignColumn
+    autocmd FileType java setlocal noexpandtab
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal commentstring=#\ %s
+    autocmd FileType python setlocal commentstring=#\ %s
+    autocmd Filetype go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+    autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+    autocmd BufEnter Makefile setlocal noexpandtab
+    autocmd BufEnter *.cls setlocal filetype=java
+    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+    autocmd BufEnter *.sh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+    " Treat .json files as .js
+    autocmd bufnewfile,bufread *.json setfiletype json syntax=javascript
+    " treat .md files as markdown
+    autocmd bufnewfile,bufread *.md setlocal filetype=markdown
+    " treat .tex files as tex
+    autocmd bufread,bufnewfile *.tex set filetype=tex
+  augroup end
+endif
+
 
 """"""""""""""""""""""""""""""
 " => Buffers, Tabs and Windows
 """"""""""""""""""""""""""""""
 
 " Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
+set switchbuf=useopen,usetab,newtab
+" Do always show tabline
+set showtabline=2
+
+" Close the current buffer
+"map <silent> <leader>bd :Bclose<CR>:hide<cr>
+map <leader>bd :Bdelete<cr>
+
+" Close all the buffers
+map <leader>ba :bufdo :Bdelete<cr>
 
 
 """"""""""""""""""""""""""""""
@@ -136,10 +180,10 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " Add a bit extra margin to the left
 "set foldcolumn=1
-set foldmethod=indent "  fold based on indent
-set foldnestmax=3     "  deepest fold is 3 levels
-set foldenable        "fold by default
-set foldlevelstart=10 "   open most folds by default
+set foldmethod=indent     " fold based on indent
+set foldnestmax=3         " deepest fold is 3 levels
+set nofoldenable          " fold by default
+set foldlevelstart=10     " open most folds by default
 
 " ================ Scrolling ========================
 
@@ -167,7 +211,7 @@ set smartcase
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in SVN, git etc anyway...
 set nobackup
 set nowb
 set noswapfile
@@ -184,3 +228,89 @@ try
     set undofile
 catch
 endtry
+
+" ----------------------------------------------------------------------
+" | Automatic Commands                                                 |
+" ----------------------------------------------------------------------
+
+if has("autocmd")
+  " Autocommand Groups.
+  " http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  " Automatically reload the configurations from
+  " the `~/.vimrc` file whenever they are changed.
+
+  augroup auto_reload_vim_configs
+    autocmd!
+    autocmd BufWritePost $MYVIMRC so $MYVIMRC
+  augroup END
+
+  " Ignore quickfix windows in buffer list
+  augroup ignore_buf_list
+    autocmd!
+    autocmd FileType qf set nobuflisted
+  augroup END
+
+  augroup tex
+    autocmd!
+    autocmd FileType tex setlocal tw=78|setlocal spell spelllang=en_us
+  augroup END
+
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  " Automatically strip the trailing
+  " whitespaces when files are saved.
+
+  augroup strip_trailing_whitespaces
+
+    " List of file types that use the trailing whitespaces:
+    "
+    "  * Markdown
+    "    https://daringfireball.net/projects/markdown/syntax#block
+
+    let excludedFileTypes = [
+          \ "markdown",
+          \ "mkd.markdown"
+          \]
+
+    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    " Only strip the trailing whitespaces if
+    " the file type is not in the excluded list.
+
+    autocmd!
+    autocmd BufWritePre * if index(excludedFileTypes, &ft) < 0 | :call StripTrailingWhitespaces()
+
+  augroup END
+endif
+
+
+" ----------------------------------------------------------------------
+" | Helper Functions                                                   |
+" ----------------------------------------------------------------------
+
+function! StripTrailingWhitespaces()
+
+  " Save last search and cursor position.
+
+  let searchHistory = @/
+  let cursorLine = line(".")
+  let cursorColumn = col(".")
+
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  " Strip trailing whitespaces.
+
+  %s/\s\+$//e
+
+  " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  " Restore previous search history and cursor position.
+
+  let @/ = searchHistory
+  call cursor(cursorLine, cursorColumn)
+
+endfunction
+

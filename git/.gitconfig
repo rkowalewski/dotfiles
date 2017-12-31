@@ -32,4 +32,4 @@
 [merge]
 	tool = diffconflicts
 [core]
-	excludesfile = .lvimrc
+	excludesfile = ~/.gitignore_global

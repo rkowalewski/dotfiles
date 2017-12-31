@@ -18,7 +18,7 @@ fi
 
 # Update all
 cd ~/.vim/plugged/YouCompleteMe
-git submodule update --init --recursive
+#git submodule update --init --recursive
 
 BUILD_DIR="$(mktemp -d /tmp/build_ycm.XXXX)"
 
