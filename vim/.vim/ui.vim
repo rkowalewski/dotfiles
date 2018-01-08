@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("termguicolors") && has("nvim")
+if has("termguicolors")
   set termguicolors
 endif
 
@@ -11,22 +11,23 @@ endif
 function! Light()
     echom "set bg=light"
     set bg=light
-    "colorscheme off
-    "set nocursorline
-    let g:airline_theme='light'
-    AirlineRefresh
+
+    if (exists('g:colors_name') && (g:colors_name ==# 'off'))
+        let g:airline_theme='light'
+        AirlineRefresh
+    endif
+
     " set list
 endfunction
 
 function! Dark()
     echom "set bg=dark"
     set background=dark
-    let g:airline_theme='monochrome'
-    "colorscheme monochrome
-    "set cursorline
-    AirlineRefresh
-    " darcula fix to hide the indents:
-    " set nolist
+
+    if (exists('g:colors_name') && g:colors_name ==# 'off')
+        let g:airline_theme='monochrome'
+        AirlineRefresh
+    endif
 endfunction
 
 function! ToggleLightDark()

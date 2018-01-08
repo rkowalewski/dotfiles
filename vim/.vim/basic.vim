@@ -85,7 +85,11 @@ set matchtime=2
 " A file that matches with one of these patterns is ignored when expanding
 " wildcards, completing file or directory names, and influences the result of
 " |expand()|, |glob()| and |globpath()| unless a flag is passed to disable this
+
+" Object files
 set wildignore=*.o,*~,*.pyc
+" Latex files
+set wildignore+=*.aux,*.fdb_latexmk,*.fls
 if has("win16") || has("win32")
   set wildignore+=.git\*,.hg\*,.svn\*
 else

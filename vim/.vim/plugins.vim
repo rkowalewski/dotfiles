@@ -22,6 +22,7 @@ Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
+Plug 'rakr/vim-one'
 
 if ((v:version >= '704' || has('nvim')) && executable('ctags'))
   Plug 'Ludovicchabant/vim-gutentags'
