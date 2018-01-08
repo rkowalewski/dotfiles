@@ -37,11 +37,9 @@ function! ToggleLightDark()
 endfunction
 
 " Always set background before colorscheme
-set bg=dark
+set background=dark
 try
-    colorscheme off
-  " For whatever reason we have to set it again
-  "set background=dark
+    colorscheme happy_hacking
 catch
 endtry
 

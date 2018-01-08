@@ -3,18 +3,19 @@
 call  plug#begin('~/.vim/plugged')
 
 
-" UI
+" Colorschemes
 Plug 'fxn/vim-monochrome'
 Plug 'rkowalewski/vim-colors-off'
-Plug 'blueshirts/darcula'
-Plug 'morhetz/gruvbox' " Gruvbox Theme
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
+
+" Airline
 Plug 'Vim-airline/vim-airline'
 Plug 'Vim-airline/vim-airline-themes'
 
 " Tpopes must haves
 Plug 'tpope/vim-fugitive'
-Plug 'Tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
@@ -23,17 +24,18 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
 
+" Tools
 Plug 'szw/vim-maximizer'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
 Plug 'embear/vim-localvimrc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'romainl/vim-qf'
-
+Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
+
+" Other
 Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
-Plug 'rakr/vim-one'
 
 " Fuzzy Find
 if (has('unix'))
@@ -60,10 +62,9 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     endfunction
 
     " Autocompletion
-    "Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-    "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'Shougo/deoplete.nvim'
     Plug 'tweekmonster/deoplete-clang2'
+    " Linting
     Plug 'w0rp/ale'
 endif
 
