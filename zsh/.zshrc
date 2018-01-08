@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 #
-  export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 export DOTFILES=$HOME/.dotfiles
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -11,12 +11,12 @@ export DOTFILES=$HOME/.dotfiles
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 if [[ `uname` =~ ^CYGWIN_NT ]]; then
-  # Async pure theme not supported on windows
-  # see https://github.com/sindresorhus/pure/issues/198
-  ZSH_THEME="babun"
+    # Async pure theme not supported on windows
+    # see https://github.com/sindresorhus/pure/issues/198
+    ZSH_THEME="babun"
 else
-  PURE_PROMPT_SYMBOL="λ"
-  ZSH_THEME="pure"
+    PURE_PROMPT_SYMBOL="λ"
+    ZSH_THEME="pure"
 fi
 
 # Uncomment the following line to use case-sensitive completion.
@@ -71,12 +71,12 @@ plugins=(git gitfast solarized-man colorize common-aliases tmux zsh-256color ssh
 
 # Load Supercomputing Environment Modules
 if [[ -f "/etc/profile.d/modules.sh" ]]; then
-  source /etc/profile.d/modules.sh
+    source /etc/profile.d/modules.sh
 
-  if [[ -n "$(module avail |& grep -o git)" ]]; then
-    # Load git if available
-    module load git
-  fi
+    if [[ -n "$(module avail |& grep -o git)" ]]; then
+        # Load git if available
+        module load git
+    fi
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -95,7 +95,14 @@ export LANGUAGE=en_US.UTF-8
 #   export EDITOR='mvim'
 # fi
 
-export EDITOR=vim
+
+if [[ -x "$(command -v nvim)" ]]
+then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -113,16 +120,9 @@ export EDITOR=vim
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-# source all files from custom zsh aliases
-
-
-for file in $DOTFILES/zsh/scripts/**/*;
-do
-  source $file
-done
 
 [[ -z "${SSH_CONNECTION}"  && -z "${TMUX}" \
-  && -n "$(type dynamic-colors)" ]] && dynamic-colors init
+    && -n "$(type dynamic-colors)" ]] && dynamic-colors init
 
 eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.ansi-dark`
 
@@ -133,11 +133,20 @@ alias tmux='tmux -2'
 unsetopt share_history
 
 if [[ ! `uname` =~ ^CYGWIN_NT ]] && type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
+    alias vim='nvim'
 fi
 
 # Bind Ctrl-U to backward-kill-line instead of the whole line
 bindkey \^U backward-kill-line
+
+#FZF Config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# source all files from custom zsh aliases
+for file in $DOTFILES/zsh/scripts/**/*;
+do
+    source $file
+done
 
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local

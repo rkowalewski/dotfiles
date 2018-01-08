@@ -24,6 +24,9 @@ path=("$DYNAMIC_COLORS_ROOT/bin" $path)
 
 path=("$HOME/opt/bin" $path)
 
+path=("$HOME/.cargo/bin" $path)
+path=("$HOME/.fzf/bin" $path)
+
 # add only those paths which really exist and finally export it
 path=($^path(N))
 export PATH

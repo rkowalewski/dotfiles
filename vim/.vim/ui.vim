@@ -16,8 +16,6 @@ function! Light()
         let g:airline_theme='light'
         AirlineRefresh
     endif
-
-    " set list
 endfunction
 
 function! Dark()
@@ -39,12 +37,12 @@ function! ToggleLightDark()
 endfunction
 
 " Always set background before colorscheme
-let g:airline_theme= 'monochrome'
-set background=dark
-
+set bg=dark
 try
-  colorscheme off
+    colorscheme off
   " For whatever reason we have to set it again
   "set background=dark
 catch
 endtry
+
+let g:airline_theme= 'monochrome'

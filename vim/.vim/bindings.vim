@@ -24,6 +24,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Jump to tag (Gutentags)
 nnoremap ü <C-]>
 
+" ================ File Browsing  ===================
+nmap <C-p> :Files<CR>
+
 " ================ YCM  =============================
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
@@ -105,8 +108,9 @@ nnoremap <silent><leader>n :set relativenumber!<cr>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [,ts] Toggle Syntastic.
-
-nmap <leader>ts :SyntasticToggleMode<CR>
+if exists('g:loaded_syntastic_plugin')
+    nmap <leader>ts :SyntasticToggleMode<CR>
+endif
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -130,11 +134,6 @@ nmap <leader>w :w!<cr>
 " [, cf] ClangFormat
 
 map <leader>cf :Autoformat<CR>
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" [,.] / [,b] CtrlP Mappings
-nnoremap <space>. :CtrlPTag<CR>
-nnoremap <space>b :CtrlPBuffer<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [, c] Toggle Light / Dark Color Theme
