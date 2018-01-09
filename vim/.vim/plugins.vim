@@ -38,7 +38,7 @@ Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
 
 " Fuzzy Find
-if (has('unix'))
+if (has('unix') && !has('win32unix'))
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
 else

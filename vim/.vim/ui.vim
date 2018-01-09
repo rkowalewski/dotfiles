@@ -36,11 +36,13 @@ function! ToggleLightDark()
   endif
 endfunction
 
-" Always set background before colorscheme
-set background=dark
 try
-    colorscheme happy_hacking
+    colorscheme hybrid_reverse
 catch
 endtry
 
-let g:airline_theme= 'monochrome'
+" set background after colorscheme
+set background=dark
+
+let g:airline_theme= 'hybrid'
+
