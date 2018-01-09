@@ -204,7 +204,7 @@ let g:ale_c_clang_options = ''
 let g:ale_cpp_clang_options = ''
 
 let g:ale_open_list = 1
-let g:ale_set_quickfix = 1
+let g:ale_set_quickfix = 0
 
 
 "Simply Stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim

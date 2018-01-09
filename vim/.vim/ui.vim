@@ -41,8 +41,5 @@ try
 catch
 endtry
 
-" set background after colorscheme
 set background=dark
-
 let g:airline_theme= 'hybrid'
-
