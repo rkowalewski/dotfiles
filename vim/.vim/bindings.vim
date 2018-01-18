@@ -137,7 +137,8 @@ map <leader>cf :Autoformat<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [, c] Toggle Light / Dark Color Theme
-nnoremap <leader>c :call ToggleLightDark()<CR>
+nnoremap <leader>cb :call ToggleLightDark()<CR>
+nnoremap <leader>cm :call CodeMode()<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

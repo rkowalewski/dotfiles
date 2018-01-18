@@ -26,12 +26,12 @@ Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
 
 " Tools
 Plug 'szw/vim-maximizer'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'embear/vim-localvimrc'
 Plug 'Chiel92/vim-autoformat'
 Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
+Plug 'chrisbra/vim-diff-enhanced'
 
 " Other
 Plug 'Christoomey/vim-tmux-navigator'
@@ -204,7 +204,7 @@ let g:ale_c_clang_options = ''
 let g:ale_cpp_clang_options = ''
 
 let g:ale_open_list = 1
-let g:ale_set_quickfix = 0
+let g:ale_set_quickfix = 1
 
 
 "Simply Stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim

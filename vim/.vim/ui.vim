@@ -1,8 +1,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("termguicolors")
-  set termguicolors
+" Set Termguicolors only if we have it and we are not in Windows WSL
+if has('termguicolors') && (has('nvim') || (has("unix") && system("uname -r | grep Microsoft") == 1))
+    set termguicolors
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -23,17 +24,26 @@ function! Dark()
     set background=dark
 
     if (exists('g:colors_name') && g:colors_name ==# 'off')
-        let g:airline_theme='monochrome'
+        let g:airline_theme='hybrid'
         AirlineRefresh
     endif
 endfunction
 
 function! ToggleLightDark()
-  if &bg ==# "light"
-    call Dark()
-  else
-    call Light()
-  endif
+    if &bg ==# "light"
+        call Dark()
+    else
+        call Light()
+    endif
+endfunction
+
+function! CodeMode()
+    try
+        colorscheme off
+    catch
+    endtry
+
+    call Dark();
 endfunction
 
 try

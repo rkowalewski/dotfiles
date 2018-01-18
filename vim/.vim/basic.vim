@@ -36,6 +36,14 @@ set secure
 
 " Enable line numbers
 set number
+set relativenumber
+
+if (!has('nvim') && has('unix') && system("uname -r | grep Microsoft") == 0)
+    " Disable this for native WSL Vim due to double minus performance
+    " see https://github.com/vim/vim/issues/282
+    set norelativenumber
+    set nocursorline
+endif
 
 " Show “invisible” characters
 set list listchars=tab:▸\ ,trail:·,nbsp:_
@@ -88,7 +96,7 @@ set matchtime=2
 
 " Object files
 set wildignore=*.o,*~,*.pyc
-" Latex files
+" Latek:set x files
 set wildignore+=*.aux,*.fdb_latexmk,*.fls
 if has("win16") || has("win32")
   set wildignore+=.git\*,.hg\*,.svn\*
