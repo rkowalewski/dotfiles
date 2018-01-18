@@ -18,18 +18,19 @@
   dr  = "!f() { git diff "$1"^.."$1"; }; f"
   lc  = "!f() { git ll "$1"^.."$1"; }; f"
   diffr  = "!f() { git diff "$1"^.."$1"; }; f"
-[mergetool]
-  prompt = false
-  keepBackup = false
 [include]
   path = ~/.gitconfig.user
-[mergetool "diffconflicts"]
-	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
-	trustExitCode = true
-	keepBackup = false
+[mergetool]
+	trustExitCode = false
+	prompt = false
 [push]
   default = current
-[merge]
-	tool = diffconflicts
 [core]
 	excludesfile = ~/.gitignore_global
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = 0
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
