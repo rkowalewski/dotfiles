@@ -34,15 +34,23 @@ set modelines=4
 set exrc
 set secure
 
+" Do not show the cursorline
+set nocursorline
+set nocursorcolumn
+
 " Enable line numbers
 set number
-set relativenumber
 
-if (!has('nvim') && has('unix') && system("uname -r | grep Microsoft") == 0)
+function! __has_wsl()
+    return (has('unix') && system("uname -r | grep Microsoft") != 0)
+endfunction
+
+if (!has('nvim') && __has_wsl() == 1)
     " Disable this for native WSL Vim due to double minus performance
     " see https://github.com/vim/vim/issues/282
     set norelativenumber
-    set nocursorline
+else
+    set relativenumber
 endif
 
 " Show “invisible” characters

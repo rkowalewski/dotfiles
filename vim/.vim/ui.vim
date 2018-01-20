@@ -1,8 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set Termguicolors only if we have it and we are not in Windows WSL
-if has('termguicolors') && (has('nvim') || (has("unix") && system("uname -r | grep Microsoft") == 1))
+" Set Termguicolors only if we have it and if we are not in Windows WSL
+if has('termguicolors') && (has('nvim') || !__has_wsl())
     set termguicolors
 endif
 
@@ -43,7 +43,7 @@ function! CodeMode()
     catch
     endtry
 
-    call Dark();
+    call Dark()
 endfunction
 
 try
