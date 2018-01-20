@@ -10,8 +10,10 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
 
 " Airline
-Plug 'Vim-airline/vim-airline'
-Plug 'Vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'cocopon/lightline-hybrid.vim'
+Plug 'maximbaz/lightline-ale'
+Plug 'mgee/lightline-bufferline'
 
 " Tpopes must haves
 Plug 'tpope/vim-fugitive'
@@ -51,15 +53,15 @@ if ((v:version >= '704' || has('nvim')) && executable('ctags'))
 endif
 
 if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && executable('clang')
-    function! BuildYCM(info)
-        " info is a dictionary with 3 fields
-        " - name:   name of the plugin
-        " - status: 'installed', 'updated', or 'unchanged'
-        " - force:  set on PlugInstall! or PlugUpdate!
-        if a:info.status == 'installed' || a:info.force
-            ! sh $DOTFILES/contrib/install_ycm.sh
-        endif
-    endfunction
+    "function! BuildYCM(info)
+    "    " info is a dictionary with 3 fields
+    "    " - name:   name of the plugin
+    "    " - status: 'installed', 'updated', or 'unchanged'
+    "    " - force:  set on PlugInstall! or PlugUpdate!
+    "    if a:info.status == 'installed' || a:info.force
+    "        ! sh $DOTFILES/contrib/install_ycm.sh
+    "    endif
+    "endfunction
 
     " Autocompletion
     Plug 'Shougo/deoplete.nvim'
@@ -92,9 +94,8 @@ endif
 let g:gutentags_exclude_project_root = []
 call add(g:gutentags_exclude_project_root, $DOTFILES)
 
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" => The silver seacher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => The Silver Searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
@@ -109,69 +110,6 @@ if executable('ag')
 endif
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_powerline_fonts = 1
-
-let g:airline#extensions#tabline#enabled = 2
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#right_sep = ' '
-let g:airline#extensions#tabline#right_alt_sep = '|'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_left_sep = ' '
-let g:airline_left_alt_sep = '|'
-let g:airline_right_sep = ' '
-let g:airline_right_alt_sep = '|'
-
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => YCM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable YCM Linting, we only want auto completion
-let g:ycm_show_diagnostics_ui = 0
-
-let g:ycm_key_list_select_completion = ['<C-j>']
-let g:ycm_key_list_previous_completion = ['<C-k>']
-let g:ycm_key_list_accept_completion = ['<C-y>']
-
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_extra_conf_globlist=['~/.vim/*']
-
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = "<<"
-let g:ycm_always_populate_location_list = 0
-let g:ycm_auto_trigger=1
-let g:ycm_max_diagnostics_to_display=10000
-let g:ycm_min_num_identifier_candidate_chars=0
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_open_loclist_on_ycm_diags=1
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-let g:ycm_filetype_blacklist={
-            \ 'vim' : 1,
-            \ 'tagbar' : 1,
-            \ 'qf' : 1,
-            \ 'notes' : 1,
-            \ 'markdown' : 1,
-            \ 'md' : 1,
-            \ 'unite' : 1,
-            \ 'text' : 1,
-            \ 'vimwiki' : 1,
-            \ 'pandoc' : 1,
-            \ 'infolog' : 1,
-            \ 'objc' : 1,
-            \ 'mail' : 1
-            \}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => .lvimrc
@@ -200,49 +138,108 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = '✹ Error'
 let g:ale_echo_msg_warning_str = '⚠ Warning'
 
-let g:ale_c_clang_options = ''
-let g:ale_cpp_clang_options = ''
-
 let g:ale_open_list = 1
 let g:ale_set_quickfix = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Lightline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline#ale#indicator_warnings = '⚠'
+let g:lightline#ale#indicator_errors = '✗'
+let g:lightline#ale#indicator_ok = ''
 
-"Simply Stolen from https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bcheckers/syntax-checking/config.vim
 
-" For a more fancy ale statusline
-function! ALEGetError()
-    let l:res = ale#statusline#Status()
-    if l:res ==# 'OK'
-        return ''
+" Lightline
+let g:lightline = {
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [
+            \       ['mode', 'paste'], ['readonly'],
+            \       ['fugitive'],
+            \    ],
+            \   'right': [
+            \       ['percent'], ['lineinfo'],
+            \       ['fileformat', 'fileencoding', 'filetype'],
+            \       ['linter_warnings', 'linter_errors', 'linter_ok']
+            \   ]
+            \ },
+            \ 'tabline': {
+            \   'left': [['buffers']],
+            \   'right': [['close']]
+            \ },
+            \ 'component_expand': {
+            \   'linter_warnings': 'lightline#ale#warnings',
+            \   'linter_errors': 'lightline#ale#errors',
+            \   'linter_ok': 'lightline#ale#ok',
+            \   'buffers': 'lightline#bufferline#buffers',
+            \   'fugitive': 'LightLineFugitive',
+            \   'gitgutter': 'LightLineGitGutter',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename'
+            \ },
+            \ 'component_type': {
+            \   'readonly': 'error',
+            \   'linter_warnings': 'warning',
+            \   'linter_errors': 'error',
+            \   'buffers': 'tabsel'
+            \ },
+            \ }
+
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
     else
-        let l:e_w = split(l:res)
-        if len(l:e_w) == 2 || match(l:e_w, 'E') > -1
-            return ' •' . matchstr(l:e_w[0], '\d\+') .' '
-        endif
+        return ""
     endif
 endfunction
 
-function! ALEGetWarning()
-    let l:res = ale#statusline#Status()
-    if l:res ==# 'OK'
-        return ''
-    else
-        let l:e_w = split(l:res)
-        if len(l:e_w) == 2
-            return ' •' . matchstr(l:e_w[1], '\d\+')
-        elseif match(l:e_w, 'W') > -1
-            return ' •' . matchstr(l:e_w[0], '\d\+')
-        endif
-    endif
+function! LightLineReadonly()
+    return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
 
+function! LightLineFugitive()
+    return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
 
+function! LightLineGitGutter()
+    if ! exists('*GitGutterGetHunkSummary')
+                \ || ! get(g:, 'gitgutter_enabled', 0)
+                \ || winwidth('.') <= 90
+        return ''
+    endif
+    let symbols = [
+                \ g:gitgutter_sign_added,
+                \ g:gitgutter_sign_modified,
+                \ g:gitgutter_sign_removed
+                \ ]
+    let hunks = GitGutterGetHunkSummary()
+    let ret = []
+    for i in [0, 1, 2]
+        if hunks[i] > 0
+            call add(ret, symbols[i] . hunks[i])
+        endif
+    endfor
+    return join(ret, ' ')
+endfunction
 
-" Use deoplete.
+function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Deoplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:deoplete#enable_at_startup = 1
 
-let g:deoplete#sources#clang#libclang_path = "/llvm/5.0/lib/libclang.so"
+let g:deoplete#sources#clang#libclang_path = "/opt/llvm/5.0/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/opt/llvm/5.0/include/clang"
 
 if !exists('g:deoplete#omni#input_patterns')
@@ -269,29 +266,29 @@ let g:fzf_colors =
 " add Rg command for ripgrep
 if (executable('rg'))
     command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
+                \ call fzf#vim#grep(
+                \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+                \   <bang>0 ? fzf#vim#with_preview('up:60%')
+                \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \   <bang>0)
 elseif (executable('ag'))
     command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>,
-    \ <bang>0 ? fzf#vim#with_preview('up:60%')
-    \         : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \ <bang>0)
+                \ call fzf#vim#ag(<q-args>,
+                \ <bang>0 ? fzf#vim#with_preview('up:60%')
+                \         : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \ <bang>0)
 endif
 
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+    " Override statusline as you like
+    highlight fzf1 ctermfg=161 ctermbg=251
+    highlight fzf2 ctermfg=23 ctermbg=251
+    highlight fzf3 ctermfg=237 ctermbg=251
+    setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()

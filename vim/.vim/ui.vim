@@ -15,7 +15,6 @@ function! Light()
 
     if (exists('g:colors_name') && (g:colors_name ==# 'off'))
         let g:airline_theme='light'
-        AirlineRefresh
     endif
 endfunction
 
@@ -25,7 +24,6 @@ function! Dark()
 
     if (exists('g:colors_name') && g:colors_name ==# 'off')
         let g:airline_theme='hybrid'
-        AirlineRefresh
     endif
 endfunction
 
