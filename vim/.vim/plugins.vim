@@ -147,6 +147,10 @@ let g:ale_set_quickfix = 1
 let g:lightline#ale#indicator_warnings = '⚠'
 let g:lightline#ale#indicator_errors = '✗'
 let g:lightline#ale#indicator_ok = ''
+let g:lightline#bufferline#read_only = "\ue0a2"
+let g:lightline#bufferline#unicode_symbols = 1
+let g:lightline#bufferline#filename_modifier = ':~:.'
+let g:lightline#bufferline#show_number=1
 
 
 " Lightline
@@ -154,7 +158,7 @@ let g:lightline = {
             \ 'colorscheme': 'wombat',
             \ 'active': {
             \   'left': [
-            \       ['mode', 'paste'], ['readonly'],
+            \       ['mode', 'paste'],
             \       ['fugitive'],
             \    ],
             \   'right': [
@@ -167,10 +171,12 @@ let g:lightline = {
             \   'left': [['buffers']],
             \   'right': [['close']]
             \ },
+            \ 'component': {
+            \   'lineinfo': '%3l:%-2c',
+            \ },
             \ 'component_expand': {
             \   'linter_warnings': 'lightline#ale#warnings',
             \   'linter_errors': 'lightline#ale#errors',
-            \   'linter_ok': 'lightline#ale#ok',
             \   'buffers': 'lightline#bufferline#buffers',
             \   'fugitive': 'LightLineFugitive',
             \   'gitgutter': 'LightLineGitGutter',
