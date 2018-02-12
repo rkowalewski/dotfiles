@@ -1,8 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set Termguicolors only if we have it and if we are not in Windows WSL
-if has('termguicolors') && (has('nvim') || !__has_wsl())
+if has('termguicolors')
+    if (!has('nvim'))
+        "we have to this for vim only
+        " to insert these character, press <CTRL-V><ESC>
+        set t_8f=[38;2;%lu;%lu;%lum
+        set t_8b=[48;2;%lu;%lu;%lum
+    endif
     set termguicolors
 endif
 

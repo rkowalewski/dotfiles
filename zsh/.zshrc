@@ -96,7 +96,7 @@ export LANGUAGE=en_US.UTF-8
 # fi
 
 
-if [[ -x "$(command -v nvim)" ]]
+if [[ -x "$(command -v nvim)" && ! `uname` =~ ^CYGWIN_NT ]]
 then
     export EDITOR=nvim
 else
