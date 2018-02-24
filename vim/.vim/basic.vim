@@ -21,7 +21,10 @@ let mapleader = ","
 " Don’t add empty newlines at the end of files
 " set binary
 " set eol
-set fixeol " Fix end of line if missing
+
+if (v:version >= '704')
+    set fixeol " Fix end of line if missing
+endif
 
 " Automatically reload file if changed from outside
 set autoread
