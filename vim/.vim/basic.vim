@@ -22,7 +22,7 @@ let mapleader = ","
 " set binary
 " set eol
 
-if (v:version >= '704')
+if (v:version > '704')
     set fixeol " Fix end of line if missing
 endif
 
