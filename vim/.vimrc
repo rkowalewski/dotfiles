@@ -6,7 +6,9 @@ set nocompatible " be iMproved
 runtime vim-plug/plug.vim
 source $HOME/.vim/plugins.vim
 
-" Enable file type detection
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntax Highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype on
 filetype plugin on
 filetype indent on
