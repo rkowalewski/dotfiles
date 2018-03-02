@@ -29,28 +29,6 @@ source $HOME/.vim/ui.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $HOME/.vim/bindings.vim
 
-
-"Fix for Win32Yank Problem in Windows
-"See https://github.com/neovim/neovim/issues/7021
-"See https://github.com/neovim/neovim/issues/7031
-"See $HOME/opt/bin/win32yank
-"if !empty(matchstr(system("uname -a"), "microsoft"))
-"   let g:clipboard = {
-"       \ 'name': 'win32yank',
-"       \ 'copy': {
-"       \   '+': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -i --crlf',
-"       \   '*': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -i --crlf',
-"       \   },
-"       \ 'paste': {
-"       \   '+': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -o --lf',
-"       \   '*': '$HOME/.config/nvim/wslnoerr.sh win32yank.exe -o --lf',
-"       \   },
-"       \ 'cache_enabled': 1,
-"       \ }
-"endif
-
-
-
 " ----------------------------------------------------------------------
 " | Local Settings                                                     |
 " ----------------------------------------------------------------------

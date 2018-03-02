@@ -34,6 +34,7 @@ Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'kana/vim-fakeclip'
 
 " Other
 Plug 'Christoomey/vim-tmux-navigator'
