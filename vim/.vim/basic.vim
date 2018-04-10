@@ -273,6 +273,7 @@ if has("autocmd")
   augroup ignore_buf_list
     autocmd!
     autocmd FileType qf set nobuflisted
+    autocmd FileType fzf set nobuflisted
   augroup END
 
   augroup tex
