@@ -43,7 +43,9 @@ set nocursorcolumn
 
 " Enable line numbers
 set number
-set relativenumber
+if (v:version >= '703')
+    set relativenumber
+endif
 
 function! __has_wsl()
     return (has('unix') && system("uname -r | grep Microsoft") != 0)
@@ -130,7 +132,10 @@ endif
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 set tw=79
-set colorcolumn=85
+
+if (v:version >= '703')
+    set colorcolumn=85
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Indentation

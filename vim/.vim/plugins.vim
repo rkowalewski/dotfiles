@@ -29,7 +29,9 @@ Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
 " Tools
 Plug 'szw/vim-maximizer'
 Plug 'embear/vim-localvimrc'
-Plug 'Chiel92/vim-autoformat'
+if ((v:version >= '704' || has('nvim')))
+    Plug 'Chiel92/vim-autoformat'
+endif
 Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
