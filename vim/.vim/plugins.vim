@@ -36,9 +36,10 @@ Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
 Plug 'chrisbra/vim-diff-enhanced'
-Plug 'kana/vim-fakeclip'
+" This Plugin obviously slows down vim.
+"Plug 'kana/vim-fakeclip'
 
-" Other
+"" Other
 Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
 
@@ -67,10 +68,10 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     "endfunction
 
     " Autocompletion
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'tweekmonster/deoplete-clang2'
-    " Linting
-    Plug 'w0rp/ale'
+    Plug 'Shougo/deoplete.nvim', {'for' : ['c','cpp']}
+    Plug 'tweekmonster/deoplete-clang2', {'for' : ['c','cpp']}
+   " Linting
+    Plug 'w0rp/ale', {'for' : ['c','cpp']}
 endif
 
 
