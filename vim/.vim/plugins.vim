@@ -21,10 +21,12 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-eunuch'
 
 " Text editing
 Plug 'godlygeek/tabular'
 Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
+Plug 'plasticboy/vim-markdown'
 
 " Tools
 Plug 'szw/vim-maximizer'
@@ -69,7 +71,7 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
 
     " Autocompletion
     Plug 'Shougo/deoplete.nvim', {'for' : ['c','cpp']}
-    Plug 'tweekmonster/deoplete-clang2', {'for' : ['c','cpp']}
+    Plug 'zchee/deoplete-clang', {'for' : ['c','cpp']}
    " Linting
     Plug 'w0rp/ale', {'for' : ['c','cpp']}
 endif
@@ -129,7 +131,7 @@ let g:ale_linters = {
             \ 'c' : ['clang']
             \}
 
-let g:ale_c_build_dir_names = ['build.dev', 'build', 'bin']
+let g:ale_c_build_dir_names = ['build.dev.clang', '.']
 
 let g:ale_lint_on_text_changed = 'never'
 
@@ -248,9 +250,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#sources#clang#libclang_path = "/opt/llvm/5.0/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "/opt/llvm/5.0/include/clang"
 
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}

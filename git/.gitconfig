@@ -34,3 +34,5 @@
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
+[mergetool "vimdiff"]
+	trustExitCode = false

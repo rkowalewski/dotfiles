@@ -3,13 +3,19 @@ typeset -U path
 path+="$HOME/bin"
 path+='/usr/local/bin'
 
-# prepend path
-path=('/opt/openmpi/2.1.0/bin' $path)
+# texlive
+path+='/usr/local/texlive/current/bin/x86_64-linux'
+# Rust
+path+="$HOME/.cargo/bin"
 
-path=('/opt/tmux/bin' $path)
+path+="$HOME/.local/bin"
+# prepend path
+#path=('/opt/openmpi/2.1.0/bin' $path)
+
+#path=('/opt/tmux/bin' $path)
 
 # VIM
-path=('/opt/vim/bin' $path)
+#path=('/opt/vim/bin' $path)
 
 # append path
 path=("$HOME/opt/bin" $path)

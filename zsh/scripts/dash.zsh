@@ -1,15 +1,7 @@
 #!/bin/zsh
 
-function dgu {
-  [[ $# -ne 1 ]] && return 1
+alias dgres="/bin/grep -e '^\[=*\]' -e '^.*\[.*\(OK\|PASSED\|RUN\|ERROR\).*\]'"
+alias dgv="dgres -e '^\[.*DEBUG.*$'"
+alias dgvv="dgres -e '^\[.*\(TRACE\|DEBUG\).*$'"
+alias dgo="grep -v -e '^.*\(DEBUG\|TRACE\).*'"
 
-  /bin/grep -e '^.*\[\s*\(RUN\|OK\|ERROR\|PASSED\|--\+\)\s*\].*' -e "^\[\s\+$1.*"
-}
-
-function dgd {
-  /bin/grep -e '^.*\[\s*\(RUN\|OK\|ERROR\|PASSED\|--\+\)\s*\].*' -e '^\[.*DEBUG.*'
-}
-
-function dgt {
-  /bin/grep -e '^.*\[\s*\(RUN\|OK\|ERROR\|PASSED\|--\+\)\s*\].*' -e '^\[.*TRACE.*'
-}

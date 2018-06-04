@@ -15,11 +15,13 @@ git submodule update --init --recursive
 
 cd $HOME
 
-ln -s .dotfiles/zsh.zshrc
-ln -s .dotfiles/zsh.zshenv
+ln -s .dotfiles/zsh/.zshrc
+ln -s .dotfiles/zsh/.zshenv
 
 ln -s .dotfiles/tmux/.tmux.conf
+
 ln -s .dotfiles/git/.gitconfig
+ln -s .dotfiles/git/.gitignore_global
 
 ln -s .dotfiles/vim/.vimrc
 ln -s .dotfiles/vim/.vim

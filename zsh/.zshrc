@@ -148,6 +148,14 @@ do
     source $file
 done
 
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
-

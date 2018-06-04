@@ -131,7 +131,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
-set tw=79
+set tw=500
 
 if (v:version >= '703')
     set colorcolumn=85
@@ -161,8 +161,8 @@ if has('autocmd')
     autocmd FileType python setlocal commentstring=#\ %s
     autocmd Filetype go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
     autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 tw=79
+    autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 tw=79
 
     autocmd BufEnter Makefile setlocal noexpandtab
     autocmd BufEnter *.cls setlocal filetype=java
@@ -193,6 +193,8 @@ map <leader>bd :Bdelete<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo :Bdelete<cr>
+
+let g:netrw_bufsettings = 'nomodifiable nomodified readonly nobuflisted'
 
 
 """"""""""""""""""""""""""""""
@@ -279,6 +281,7 @@ if has("autocmd")
     autocmd!
     autocmd FileType qf set nobuflisted
     autocmd FileType fzf set nobuflisted
+    autocmd FileType netrw set nobuflisted
   augroup END
 
   augroup tex

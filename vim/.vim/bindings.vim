@@ -7,6 +7,8 @@
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+noremap <C-I> <C-A>
+
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -117,7 +119,6 @@ endif
 " [,v ] Make the opening of the `.vimrc` file easier.
 
 nmap <leader>v :vsp $MYVIMRC<CR>
-
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
