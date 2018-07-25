@@ -44,6 +44,11 @@ Plug 'chrisbra/vim-diff-enhanced'
 "" Other
 Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
+Plug 'junegunn/goyo.vim'
+
+" see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/
+" for an explanation
+Plug 'davidbeckingsale/writegood.vim', {'for' : ['markdown', 'tex'] }
 
 " Fuzzy Find
 if (has('unix') && !has('win32unix'))
