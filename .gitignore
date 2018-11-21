@@ -5,3 +5,5 @@ tmp
 vim/.vim/bundle/**
 vim/.vim/plugged
 vim/.vim/undo
+vim/.vim/autoload
+

@@ -10,9 +10,6 @@
 [submodule "zsh/custom/plugins/solarized-man"]
 	path = zsh/custom/plugins/solarized-man
 	url = git@github.com:zlsun/solarized-man.git
-[submodule "vim/.vim/vim-plug"]
-	path = vim/.vim/vim-plug
-	url = git@github.com:junegunn/vim-plug.git
 [submodule "zsh/custom/plugins/zsh-256color"]
 	path = zsh/custom/plugins/zsh-256color
 	url = git@github.com:chrissicool/zsh-256color.git
