@@ -45,6 +45,7 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'Christoomey/vim-tmux-navigator'
 Plug 'psolyca/vim-bbye'
 Plug 'junegunn/goyo.vim'
+Plug 'CallumHoward/vim-neodark'
 
 " see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/
 " for an explanation

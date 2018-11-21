@@ -85,17 +85,6 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-
 if [[ -x "$(command -v nvim)" && ! `uname` =~ ^CYGWIN_NT ]]
 then
     export EDITOR=nvim
@@ -121,8 +110,8 @@ fi
 #
 
 
-[[ -z "${SSH_CONNECTION}"  && -z "${TMUX}" \
-    && -n "$(type dynamic-colors)" ]] && dynamic-colors init
+#[[ -z "${SSH_CONNECTION}"  && -z "${TMUX}" \
+#    && -n "$(type dynamic-colors)" ]] && dynamic-colors init
 
 eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.ansi-dark`
 
@@ -141,6 +130,8 @@ bindkey \^U backward-kill-line
 
 #FZF Config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # source all files from custom zsh aliases
 for file in $DOTFILES/zsh/scripts/**/*;

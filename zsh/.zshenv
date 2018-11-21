@@ -5,21 +5,18 @@ path+='/usr/local/bin'
 
 # texlive
 path+='/usr/local/texlive/current/bin/x86_64-linux'
+
 # Rust
 path+="$HOME/.cargo/bin"
 
+# Other local stuff
 path+="$HOME/.local/bin"
-# prepend path
-#path=('/opt/openmpi/2.1.0/bin' $path)
 
-#path=('/opt/tmux/bin' $path)
-
-# VIM
-#path=('/opt/vim/bin' $path)
+# Other local stuff
+path+="$HOME/.npm_modules/bin"
 
 # append path
 path=("$HOME/opt/bin" $path)
-
 
 #dynamic colors
 [ -z "${DYNAMIC_COLORS_ROOT}" ] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
