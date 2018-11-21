@@ -13,3 +13,6 @@
 [submodule "zsh/custom/plugins/zsh-256color"]
 	path = zsh/custom/plugins/zsh-256color
 	url = git@github.com:chrissicool/zsh-256color.git
+[submodule "external/nord-dircolors"]
+	path = external/nord-dircolors
+	url = git@github.com:arcticicestudio/nord-dircolors.git

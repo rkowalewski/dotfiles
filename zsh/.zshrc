@@ -113,7 +113,8 @@ fi
 #[[ -z "${SSH_CONNECTION}"  && -z "${TMUX}" \
 #    && -n "$(type dynamic-colors)" ]] && dynamic-colors init
 
-eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.ansi-dark`
+#eval `dircolors $DOTFILES/external/dircolors-solarized/dircolors.ansi-dark`
+eval `dircolors $DOTFILES/external/nord-dircolors/src/dir_colors`
 
 #----------------------------------------------------------------------------------
 
