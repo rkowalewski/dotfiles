@@ -134,7 +134,7 @@ nmap <leader>w :w!<cr>
 
 " [, cf] ClangFormat
 
-map <leader>cf :Autoformat<CR>
+map <leader>cf :Neoformat<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " [, c] Toggle Light / Dark Color Theme

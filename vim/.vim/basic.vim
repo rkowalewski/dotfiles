@@ -222,7 +222,7 @@ set sidescroll=1
 
 " ============= Formatting of Text ===================
 if executable('par')
-  set formatprg=par\ -w78
+  " set formatprg=par\ -w78
 endif
 
 " ================ Search ===========================

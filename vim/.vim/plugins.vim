@@ -2,7 +2,6 @@
 
 call  plug#begin('~/.vim/plugged')
 
-
 " Colorschemes
 Plug 'fxn/vim-monochrome'
 Plug 'rkowalewski/vim-colors-off'
@@ -25,14 +24,14 @@ Plug 'tpope/vim-eunuch'
 
 " Text editing
 Plug 'godlygeek/tabular'
-Plug 'LaTeX-Box-Team/LaTeX-Box' "Latex-Box
 Plug 'plasticboy/vim-markdown'
 
 " Tools
 Plug 'szw/vim-maximizer'
 Plug 'embear/vim-localvimrc'
 if ((v:version >= '704' || has('nvim')))
-    Plug 'Chiel92/vim-autoformat'
+    " Plug 'Chiel92/vim-autoformat'
+    Plug 'sbdchd/neoformat'
 endif
 Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
@@ -64,6 +63,10 @@ if ((v:version >= '704' || has('nvim')) && executable('ctags'))
     Plug 'Ludovicchabant/vim-gutentags'
 endif
 
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+
 if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && executable('clang')
     "function! BuildYCM(info)
     "    " info is a dictionary with 3 fields
@@ -76,12 +79,10 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     "endfunction
 
     " Autocompletion
-    Plug 'Shougo/deoplete.nvim', {'for' : ['c','cpp']}
-    Plug 'zchee/deoplete-clang', {'for' : ['c','cpp']}
+    Plug 'zchee/deoplete-clang'
    " Linting
     Plug 'w0rp/ale', {'for' : ['c','cpp']}
 endif
-
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -257,8 +258,22 @@ endfunction
 
 let g:deoplete#enable_at_startup = 1
 
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
+"if !exists('g:deoplete#omni#input_patterns')
+"    let g:deoplete#omni#input_patterns = {}
+"endif
+
+if (1 == 1)
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" For conceal markers.
+if has('conceal')
+  " set conceallevel=2 concealcursor=niv
+endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
