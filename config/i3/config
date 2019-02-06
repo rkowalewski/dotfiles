@@ -249,7 +249,7 @@ for_window [class="Blueman-manager"] floating enable
 for_window [class="Pcmanfm"] floating enable
 
 # disable window title bars entirely
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 # Applets
 exec --no-startup-id nm-applet
@@ -261,7 +261,7 @@ exec --no-startup-id xfce4-power-manager
 # Other tools
 exec --no-startup-id safeeyes
 exec --no-startup-id zeal
-exec --no-startup-id feh --bg-scale ~/.config/i3/reverse-map.jpg
+exec --no-startup-id feh --bg-scale ~/.dotfiles/i3/wallpapers/the-way-you-are.png
 
 #/usr/share/LRZ_Sync_Share/LRZ_Sync_Share-Client.sh start
 

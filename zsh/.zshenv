@@ -1,34 +1,25 @@
 typeset -U path
 
-path+="$HOME/bin"
-path+='/usr/local/bin'
+path+=("$HOME/bin")
 
 # texlive
-path+='/usr/local/texlive/current/bin/x86_64-linux'
+path+=('/usr/local/texlive/current/bin/x86_64-linux')
 
 # Rust
-path+="$HOME/.cargo/bin"
+path+=("$HOME/.cargo/bin")
 
 # Other local stuff
-path+="$HOME/.local/bin"
+path+=("$HOME/.local/bin")
 
 # Other local stuff
-path+="$HOME/.npm_modules/bin"
+path+=("$HOME/.npm_modules/bin")
 
 # append path
-path=("$HOME/opt/bin" $path)
+path+=("$HOME/opt/bin")
 
-#dynamic colors
-[ -z "${DYNAMIC_COLORS_ROOT}" ] && DYNAMIC_COLORS_ROOT=$HOME/.dotfiles/external/dynamic-colors
+path+=("$HOME/.fzf/bin")
 
-export DYNAMIC_COLORS_ROOT
-
-path=("$DYNAMIC_COLORS_ROOT/bin" $path)
-
-path=("$HOME/opt/bin" $path)
-
-path=("$HOME/.cargo/bin" $path)
-path=("$HOME/.fzf/bin" $path)
+path+=("/opt/universal-ctags/bin")
 
 # add only those paths which really exist and finally export it
 path=($^path(N))
