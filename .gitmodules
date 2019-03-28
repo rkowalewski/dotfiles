@@ -16,3 +16,6 @@
 [submodule "external/nord-dircolors"]
 	path = external/nord-dircolors
 	url = git@github.com:arcticicestudio/nord-dircolors.git
+[submodule "i3/scripts/weather-block"]
+	path = i3/scripts/weather-block
+	url = git@github.com:rkowalewski/weather-block.git

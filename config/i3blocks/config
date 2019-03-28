@@ -110,6 +110,11 @@ markup=pango
 command=$SCRIPT_DIR/time
 interval=1
 
+# Weather
+[weather]
+command=$SCRIPT_DIR/weather-block/weather
+interval=1800
+
 [shutdown_menu]
 full_text=
 command=$SCRIPT_DIR/shutdown_menu
