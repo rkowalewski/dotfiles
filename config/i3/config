@@ -98,10 +98,10 @@ bindsym $mod+z focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Terminals"
-set $ws2 "2: Writing"
-set $ws3 "3"
-set $ws4 "4"
+set $ws1 "1: Code"
+set $ws2 "2"
+set $ws3 "3: Writing"
+set $ws4 "4: Reading"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7: Chat"
@@ -189,7 +189,8 @@ set $displayMode "Set display mode [w]ork [h]ome [l]aptop"
 bindsym $mod+x mode $displayMode
 mode $displayMode {
     bindsym w exec "\
-        ~/.screenlayout/work-displays.sh"; \
+        ~/.screenlayout/work-displays.sh; \
+        feh --bg-scale ~/.dotfiles/i3/wallpapers/the-way-you-are.png"; \
         mode "default"
     bindsym l exec "\
         ~/.screenlayout/laptop-display.sh"; \
@@ -208,11 +209,10 @@ bindsym $mod+shift+x exec i3lock -c000000
 bindsym $mod+m exec --no-startup-id ~/.config/i3/send2primary.sh
 
 # rofi bindings
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2  \
-    -width 100 -padding 800 -opacity "85" -bw 0 \
-    -bc "$bg-color" -bg "$bg-color" -fg "$text-color" \
-    -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+d exec rofi -show drun -theme gruvbox-dark \
+    -font "System San Francisco Display 14"
 
+# Volume buttons
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
@@ -243,10 +243,14 @@ assign [class="Spotify"] $ws10
 assign [class="Pidgin"] $ws7
 assign [class="Slack"] $ws7
 for_window [class="Spotify"] move to workspace $ws10
+for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Arandr"] floating enable
 for_window [class="Pidgin"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Pcmanfm"] floating enable
+for_window [class="Pcmanfm"] floating enable
+# LRZ Sync + Share
+for_window [class="de-dal33t-Start"] floating enable
 
 # disable window title bars entirely
 for_window [class="^.*"] border pixel 1
@@ -263,6 +267,7 @@ exec --no-startup-id safeeyes
 exec --no-startup-id zeal
 exec --no-startup-id feh --bg-scale ~/.dotfiles/i3/wallpapers/the-way-you-are.png
 
+# Start it better with the desktop launcher
 #/usr/share/LRZ_Sync_Share/LRZ_Sync_Share-Client.sh start
 
 
@@ -283,7 +288,7 @@ bar {
         UNIT=Kb \
         DEFAULT_TZ=Europe/Berlin \
         TZONES=$DEFAULT_TZ,America/Chicago \
-        TZ_FILE=~/.tz \
+        TZ_FILE=~/.local/share/i3/.tz \
         TZ_LABELS=,CST \
         STRFTIME_FORMAT="%Y-%m-%d %H:%M:%S" \
         ENABLE_CONFIRMATIONS=false \

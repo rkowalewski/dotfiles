@@ -68,8 +68,14 @@ color=#ffff00
 label=
 color=#00FFFF
 interval=10
-separator=true
+separator=false
 color=#adff00
+
+# Wlan DBM
+[wlan-dbm]
+command=$SCRIPT_DIR/wlan-dbm
+interval=10
+markup=pango
 
 # Network bandwidth
 [bandwidth]
