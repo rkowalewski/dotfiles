@@ -1,8 +1,20 @@
-setlocal foldmethod=expr
+" wrap lines
+" linebreak and nolist should be set in basic.vim
+"
+setlocal wrap
+setlocal textwidth=79
 setlocal spell
-setlocal formatoptions=want
-setlocal textwidth=78
 setlocal wrapmargin=0
 
-let g:formatdef_my_custom_markdown = '"par -w 78"'
-let g:formatters_markdown = ['my_custom_markdown']
+setlocal nospell
+
+" ============= Formatting of Text ===================
+if executable('par')
+  " set formatprg=par\ -w79
+  " done through remark and vim
+endif
+
+let g:neoformat_enabled_markdwon = ['prettier']
+"let g:neoformat_run_all_formatters = 1
+
+

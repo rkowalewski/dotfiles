@@ -28,6 +28,7 @@ nnoremap ü <C-]>
 
 " ================ File Browsing  ===================
 nmap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 
 " ================ YCM  =============================
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>

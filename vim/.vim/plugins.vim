@@ -11,8 +11,7 @@ Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
 " Airline
 Plug 'itchyny/lightline.vim'
 Plug 'cocopon/lightline-hybrid.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'mgee/lightline-bufferline'
+Plug 'mengelbrecht/lightline-bufferline'
 
 " Tpopes must haves
 Plug 'tpope/vim-fugitive'
@@ -81,7 +80,8 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     " Autocompletion
     Plug 'zchee/deoplete-clang'
    " Linting
-    Plug 'w0rp/ale', {'for' : ['c','cpp']}
+    Plug 'w0rp/ale'
+    Plug 'maximbaz/lightline-ale'
 endif
 
 " All of your Plugins must be added before the following line
@@ -142,27 +142,16 @@ let g:ale_c_build_dir_names = ['build.dev.clang', '.']
 
 let g:ale_lint_on_text_changed = 'never'
 
-let g:ale_echo_msg_format = '[#%linter%#] %s [%severity%]'
-let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
-
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-
-let g:ale_echo_msg_error_str = '✹ Error'
-let g:ale_echo_msg_warning_str = '⚠ Warning'
-
-let g:ale_open_list = 1
-let g:ale_set_quickfix = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = '⚠'
 let g:lightline#ale#indicator_errors = '✗'
-let g:lightline#ale#indicator_ok = ''
-let g:lightline#bufferline#read_only = "\ue0a2"
+let g:lightline#ale#indicator_ok = ""
+
 let g:lightline#bufferline#unicode_symbols = 1
-let g:lightline#bufferline#filename_modifier = ':~:.'
+let g:lightline#bufferline#filename_modifier = ':.'
 let g:lightline#bufferline#show_number=1
 
 
@@ -177,7 +166,7 @@ let g:lightline = {
             \   'right': [
             \       ['percent'], ['lineinfo'],
             \       ['fileformat', 'fileencoding', 'filetype'],
-            \       ['linter_warnings', 'linter_errors', 'linter_ok']
+            \       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok']
             \   ]
             \ },
             \ 'tabline': {
@@ -188,8 +177,10 @@ let g:lightline = {
             \   'lineinfo': '%3l:%-2c',
             \ },
             \ 'component_expand': {
+            \   'linter_checking': 'lightline#ale#checking',
             \   'linter_warnings': 'lightline#ale#warnings',
             \   'linter_errors': 'lightline#ale#errors',
+            \   'linter_ok': 'lightline#ale#ok',
             \   'buffers': 'lightline#bufferline#buffers',
             \   'fugitive': 'LightLineFugitive',
             \   'gitgutter': 'LightLineGitGutter',
@@ -199,8 +190,10 @@ let g:lightline = {
             \ },
             \ 'component_type': {
             \   'readonly': 'error',
+            \   'linter_checking': 'left',
             \   'linter_warnings': 'warning',
             \   'linter_errors': 'error',
+            \   'linter_ok': 'left',
             \   'buffers': 'tabsel'
             \ },
             \ }
@@ -262,8 +255,6 @@ let g:deoplete#enable_at_startup = 1
 "    let g:deoplete#omni#input_patterns = {}
 "endif
 
-if (1 == 1)
-
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -273,7 +264,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " For conceal markers.
 if has('conceal')
   " set conceallevel=2 concealcursor=niv
-endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
