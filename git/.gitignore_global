@@ -1,3 +1,6 @@
 .lvimrc
 tags
+tags.lock
+tags.temp
 build*
+indent.log
