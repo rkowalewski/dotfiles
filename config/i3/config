@@ -262,6 +262,10 @@ exec --no-startup-id gtk-redshift
 exec --no-startup-id dropbox start
 exec --no-startup-id xfce4-power-manager
 
+# Easy Switching between current and last workspace
+exec --no-startup-id ~/.dotfiles/i3/scripts/focus-last.py
+bindsym $mod+Tab exec ~/.dotfiles/i3/scripts/focus-last.py --switch
+
 # Other tools
 exec --no-startup-id safeeyes
 exec --no-startup-id zeal
