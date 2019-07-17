@@ -31,10 +31,10 @@ font pango: System San Francisco Display 8
 floating_modifier $mod
 
 set $editor /opt/termite/bin/termite
-
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec $editor
+bindsym $mod+Shift+Return exec "/opt/termite/bin/termite -d $(~/opt/bin/xcwd)"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -151,16 +151,16 @@ mode "resize" {
 # Pressing right will grow the window’s width.
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym odiaeresis resize grow width 10 px or 10 ppt
+    bindsym j resize shrink width 5 px or 5 ppt
+    bindsym k resize grow height 5 px or 5 ppt
+    bindsym l resize shrink height 5 px or 5 ppt
+    bindsym odiaeresis resize grow width 5 px or 5 ppt
 
 # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
 
 # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
@@ -230,6 +230,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # Touchpad toggle
 bindsym $mod+shift+t exec --no-startup-id ~/.dotfiles/i3/scripts/toggle-trackpad.sh
 
+#bindsym $mod+Print exec scrot '%Y-%m-%d_$wx$h.png' -s -e 'mv $f ~/shots && gimp ~/shots/$f'
 
 # Move applications to proper workspace
 exec spotify
@@ -254,6 +255,10 @@ for_window [class="de-dal33t-Start"] floating enable
 
 # disable window title bars entirely
 for_window [class="^.*"] border pixel 1
+
+# Disable kill command for Remote Windows (Remmina)
+# as this close the whole window
+# we should use the signout command
 
 # Applets
 exec --no-startup-id nm-applet

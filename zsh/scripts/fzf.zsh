@@ -21,12 +21,8 @@ bindkey '^P' fzf-open-file-or-dir
 
 if [[ -x "$(command -v rg)" ]]
 then
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,*.swp,dist,*.coffee,undo}/*" 2> /dev/null'
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,*.swp,dist,*.coffee,undo,build*}/*" 2> /dev/null'
 fi
-
-#if [[ -x "$(command -v bfs)" ]]
-#    export FZF_ALT_C_COMMAND="cd $HOME; bfs -type d -nohidden | sed \"s/^\./$HOME/\""
-#fi
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--bind J:down,K:up --reverse --ansi --multi'

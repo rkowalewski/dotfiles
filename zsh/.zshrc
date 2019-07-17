@@ -57,11 +57,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$DOTFILES/zsh/custom
 
+export FZF_BASE="${HOME}/.fzf"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast solarized-man colorize common-aliases tmux zsh-256color ripgrep ssh-agent zsh_reload)
+plugins=(git gitfast solarized-man colorize common-aliases tmux ripgrep ssh-agent zsh_reload vi-mode fzf)
 ##
 
 
@@ -120,7 +122,9 @@ eval `dircolors $DOTFILES/external/nord-dircolors/src/dir_colors`
 
 alias tmux='tmux -2'
 # do not share history between tmux windows / panes
+
 unsetopt share_history
+setopt hist_ignore_all_dups
 
 if [[ ! `uname` =~ ^CYGWIN_NT ]] && type nvim > /dev/null 2>&1; then
     alias vim='nvim'
@@ -128,9 +132,6 @@ fi
 
 # Bind Ctrl-U to backward-kill-line instead of the whole line
 bindkey \^U backward-kill-line
-
-#FZF Config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
