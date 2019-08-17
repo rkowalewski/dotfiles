@@ -36,3 +36,5 @@
 	tool = vimdiff
 [mergetool "vimdiff"]
 	trustExitCode = false
+[pull]
+	rebase = true
