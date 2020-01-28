@@ -252,6 +252,7 @@ for_window [class="Pcmanfm"] floating enable
 for_window [class="Pcmanfm"] floating enable
 # LRZ Sync + Share
 for_window [class="de-dal33t-Start"] floating enable
+for_window [class="Wine"] floating enable
 
 # disable window title bars entirely
 for_window [class="^.*"] border pixel 1

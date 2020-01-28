@@ -123,7 +123,7 @@ eval `dircolors $DOTFILES/external/nord-dircolors/src/dir_colors`
 alias tmux='tmux -2'
 # do not share history between tmux windows / panes
 
-unsetopt share_history
+# unsetopt share_history
 setopt hist_ignore_all_dups
 
 if [[ ! `uname` =~ ^CYGWIN_NT ]] && type nvim > /dev/null 2>&1; then
@@ -152,3 +152,8 @@ fi
 
 # load local settings
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS,build} --exclude=tags'
+

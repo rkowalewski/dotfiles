@@ -21,7 +21,9 @@ path+=("$HOME/.local/bin")
 path+=("$HOME/.npm_modules/bin")
 path+=("$HOME/.fzf/bin")
 path+=("$HOME/.cabal/bin")
+path+=("$HOME/go/bin")
 
+[[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local
 
 # add only those paths which really exist and finally export it
 path=($^path(N))
@@ -29,4 +31,3 @@ export PATH
 
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 
-[[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local

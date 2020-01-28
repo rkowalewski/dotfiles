@@ -24,6 +24,15 @@ indent.log
 *.idx
 *.ilg
 
+# latex beamer
+*.nav
+*.bbl
+*.run.xml
+*.bcf
+*.blg
+*.vrb
+*.snm
+
 *.ind
 ## Build tool auxiliary files:
 *.fdb_latexmk
@@ -32,3 +41,5 @@ indent.log
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+.DS_Store

@@ -7,6 +7,8 @@ Plug 'fxn/vim-monochrome'
 Plug 'rkowalewski/vim-colors-off'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
+Plug 'nightsense/cosmic_latte'
+Plug 'nightsense/snow'
 
 " Airline
 Plug 'itchyny/lightline.vim'
@@ -22,47 +24,52 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 " Text editing
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', {'for' : ['markdown', 'tex'] }
 Plug 'plasticboy/vim-markdown'
+" see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/
+" for an explanation
+Plug 'davidbeckingsale/writegood.vim', {'for' : ['markdown', 'tex'] }
 
 " Tools
 Plug 'szw/vim-maximizer'
 Plug 'embear/vim-localvimrc'
 if ((v:version >= '704' || has('nvim')))
-    " Plug 'Chiel92/vim-autoformat'
     Plug 'sbdchd/neoformat'
 endif
-Plug 'romainl/vim-qf'
 Plug 'mtth/scratch.vim'
 Plug 'majutsushi/tagbar'
-Plug 'chrisbra/vim-diff-enhanced'
-" This Plugin obviously slows down vim.
-"Plug 'kana/vim-fakeclip'
 
 "" Other
 Plug 'Christoomey/vim-tmux-navigator'
+
 Plug 'psolyca/vim-bbye'
 Plug 'junegunn/goyo.vim'
 Plug 'CallumHoward/vim-neodark'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
-" see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/
-" for an explanation
-Plug 'davidbeckingsale/writegood.vim', {'for' : ['markdown', 'tex'] }
+Plug 'sheerun/vim-polyglot'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'Lokaltog/vim-monotone'
+Plug 'huyvohcmc/atlas.vim'
+Plug 'KKPMW/distilled-vim'
+Plug 'https://git.sr.ht/~romainl/vim-bruin'
+Plug 'robertmeta/nofrils'
+Plug 'axvr/photon.vim'
+Plug 'liuchengxu/space-vim-dark'
+
 
 " Fuzzy Find
 if (has('unix') && !has('win32unix'))
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-else
-    Plug 'FelikZ/ctrlp-py-matcher'
-    Plug 'ctrlpvim/ctrlp.vim'
 endif
 
 if ((v:version >= '704' || has('nvim')) && executable('ctags'))
     Plug 'Ludovicchabant/vim-gutentags'
 endif
 
-Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
@@ -77,9 +84,6 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     "    endif
     "endfunction
 
-    " Autocompletion
-    Plug 'zchee/deoplete-clang'
-   " Linting
     Plug 'w0rp/ale'
     Plug 'maximbaz/lightline-ale'
 endif
@@ -138,113 +142,11 @@ let g:ale_linters = {
             \ 'c' : ['clang']
             \}
 
-let g:ale_c_build_dir_names = ['build.dev.clang', '.']
+let g:ale_c_build_dir_names = ['build.dev', 'build', 'bin']
+let g:ale_c_parse_compile_commands = 1
+let g:ale_cpp_clang_options = ''
 
 let g:ale_lint_on_text_changed = 'never'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Lightline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = '⚠'
-let g:lightline#ale#indicator_errors = '✗'
-let g:lightline#ale#indicator_ok = ""
-
-let g:lightline#bufferline#unicode_symbols = 1
-let g:lightline#bufferline#filename_modifier = ':.'
-let g:lightline#bufferline#show_number=1
-
-
-" Lightline
-let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [
-            \       ['mode', 'paste'],
-            \       ['fugitive'],
-            \    ],
-            \   'right': [
-            \       ['percent'], ['lineinfo'],
-            \       ['fileformat', 'fileencoding', 'filetype'],
-            \       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok']
-            \   ]
-            \ },
-            \ 'tabline': {
-            \   'left': [['buffers']],
-            \   'right': [['close']]
-            \ },
-            \ 'component': {
-            \   'lineinfo': '%3l:%-2c',
-            \ },
-            \ 'component_expand': {
-            \   'linter_checking': 'lightline#ale#checking',
-            \   'linter_warnings': 'lightline#ale#warnings',
-            \   'linter_errors': 'lightline#ale#errors',
-            \   'linter_ok': 'lightline#ale#ok',
-            \   'buffers': 'lightline#bufferline#buffers',
-            \   'fugitive': 'LightLineFugitive',
-            \   'gitgutter': 'LightLineGitGutter',
-            \   'readonly': 'LightLineReadonly',
-            \   'modified': 'LightLineModified',
-            \   'filename': 'LightLineFilename'
-            \ },
-            \ 'component_type': {
-            \   'readonly': 'error',
-            \   'linter_checking': 'left',
-            \   'linter_warnings': 'warning',
-            \   'linter_errors': 'error',
-            \   'linter_ok': 'left',
-            \   'buffers': 'tabsel'
-            \ },
-            \ }
-
-function! LightLineModified()
-    if &filetype == "help"
-        return ""
-    elseif &modified
-        return "+"
-    elseif &modifiable
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineReadonly()
-    return &readonly && &filetype !=# 'help' ? 'RO' : ''
-endfunction
-
-function! LightLineFugitive()
-    return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-function! LightLineGitGutter()
-    if ! exists('*GitGutterGetHunkSummary')
-                \ || ! get(g:, 'gitgutter_enabled', 0)
-                \ || winwidth('.') <= 90
-        return ''
-    endif
-    let symbols = [
-                \ g:gitgutter_sign_added,
-                \ g:gitgutter_sign_modified,
-                \ g:gitgutter_sign_removed
-                \ ]
-    let hunks = GitGutterGetHunkSummary()
-    let ret = []
-    for i in [0, 1, 2]
-        if hunks[i] > 0
-            call add(ret, symbols[i] . hunks[i])
-        endif
-    endfor
-    return join(ret, ' ')
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
 
 function! WordCount()
     let currentmode = mode()
@@ -296,6 +198,12 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 if has('conceal')
   " set conceallevel=2 concealcursor=niv
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Polyglot
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:polyglot_disabled = ['csv']
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FZF

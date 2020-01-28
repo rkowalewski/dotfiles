@@ -7,3 +7,5 @@ if [[ $- == *i* ]]; then
     # In Linux we can simply change the shell with chsh
 fi
 
+
+source /home/rkowalewski/.config/broot/launcher/bash/br
