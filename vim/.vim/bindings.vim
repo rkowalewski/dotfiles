@@ -26,10 +26,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Jump to tag (Gutentags)
 nnoremap ü <C-]>
 
-" ================ File Browsing  ===================
-nmap <C-p> :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-
 " ================ YCM  =============================
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>

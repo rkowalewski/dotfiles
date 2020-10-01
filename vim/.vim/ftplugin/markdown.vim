@@ -17,6 +17,12 @@ endif
 let g:neoformat_enabled_markdwon = ['prettier']
 "let g:neoformat_run_all_formatters = 1
 
+set fo-=q
+
+set norelativenumber
+colorscheme seoul256
+
+inoremap <leader><space><space> <C-V>u00a0
 
 let g:lightline = {
             \ 'colorscheme': 'wombat',

@@ -19,3 +19,6 @@
 [submodule "i3/scripts/weather-block"]
 	path = i3/scripts/weather-block
 	url = git@github.com:rkowalewski/weather-block.git
+[submodule "external/i3ipc-python"]
+	path = external/i3ipc-python
+	url = git@github.com:altdesktop/i3ipc-python.git

@@ -58,7 +58,7 @@ if (!has('nvim') && __has_wsl() == 1)
 endif
 
 " Show “invisible” characters
-set list listchars=tab:▸\ ,trail:·,nbsp:_
+set list listchars=tab:▸\ ,trail:·,nbsp:~
 
 " Always show status line
 set laststatus=2

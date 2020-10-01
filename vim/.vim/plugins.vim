@@ -114,19 +114,19 @@ call add(g:gutentags_exclude_project_root, $DOTFILES)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => The Silver Searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_working_path_mode = 0
+"
+" if executable('ag')
+"     " Use ag over grep
+"     set grepprg=ag\ --nogroup\ --nocolor
+"
+"     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
+"
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => .lvimrc
@@ -144,9 +144,9 @@ let g:ale_linters = {
 
 let g:ale_c_build_dir_names = ['build.dev', 'build', 'bin']
 let g:ale_c_parse_compile_commands = 1
-let g:ale_cpp_clang_options = ''
+"let g:ale_cpp_clang_options = ''
 
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_text_changed = 'normal'
 
 function! WordCount()
     let currentmode = mode()
@@ -253,3 +253,7 @@ endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 let g:fzf_layout = { 'down': '~20%' }
+
+"======= Mappings ============"
+nmap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>

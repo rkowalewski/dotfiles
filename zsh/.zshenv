@@ -7,6 +7,8 @@ path=("/usr/local/texlive/current/bin/x86_64-linux" $path)
 MANPATH="/usr/local/texlive/current/texmf-dist/doc/man:$MANPATH"
 INFOPATH="/usr/local/texlive/current/texmf-dist/doc/info:$INFOPATH"
 
+path=("/usr/local/go/bin" "$HOME/go/bin" $path)
+
 # prepend local binaries in path
 path=("$HOME/opt/bin" $path)
 
