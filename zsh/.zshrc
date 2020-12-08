@@ -63,7 +63,7 @@ export FZF_BASE="${HOME}/.fzf"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast solarized-man colorize common-aliases tmux ripgrep ssh-agent zsh_reload vi-mode fzf)
+plugins=(git gitfast solarized-man colorize common-aliases tmux ripgrep ssh-agent zsh_reload fzf vi-mode)
 ##
 
 
@@ -156,5 +156,19 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS,build} --exclude=tags'
+
+# see https://github.com/ohmyzsh/ohmyzsh/issues/1720#issuecomment-286366959
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 
 

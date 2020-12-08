@@ -17,6 +17,13 @@ endif
 set background=dark
 colorscheme snow
 
+" autocmd BufEnter * colorscheme snow
+" autocmd BufEnter *.md colorscheme seoul256
+
+autocmd WinEnter * doautocmd FileType
+au FileType markdown   color seoul256
+au FileType tex        color seoul256
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

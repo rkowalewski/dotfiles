@@ -26,6 +26,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Jump to tag (Gutentags)
 nnoremap ü <C-]>
 
+" Jump to tag (Gutentags)
+nnoremap <leader>b :make<CR>
+
 " ================ YCM  =============================
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>

@@ -171,7 +171,7 @@ if has('autocmd')
     " Treat .json files as .js
     autocmd bufnewfile,bufread *.json setfiletype json syntax=javascript
     " treat .md files as markdown
-    autocmd bufnewfile,bufread *.md setlocal filetype=markdown
+    " autocmd bufnewfile,bufread *.md setlocal filetype=markdown
     " treat .tex files as tex
     autocmd bufread,bufnewfile *.tex set filetype=tex
   augroup end

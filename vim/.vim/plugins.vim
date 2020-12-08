@@ -3,12 +3,14 @@
 call  plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'fxn/vim-monochrome'
-Plug 'rkowalewski/vim-colors-off'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
-Plug 'nightsense/cosmic_latte'
+"Plug 'fxn/vim-monochrome'
+"Plug 'rkowalewski/vim-colors-off'
+"Plug 'rafi/awesome-vim-colorschemes'
+"Plug 'reedes/vim-colors-pencil' "Colors Pencil Theme
+"Plug 'nightsense/cosmic_latte'
 Plug 'nightsense/snow'
+Plug 'junegunn/seoul256.vim'
+" Plug 'chrisbra/csv.vim'
 
 " Airline
 Plug 'itchyny/lightline.vim'
@@ -25,7 +27,8 @@ Plug 'tpope/vim-eunuch'
 
 " Text editing
 Plug 'godlygeek/tabular', {'for' : ['markdown', 'tex'] }
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 " see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/
 " for an explanation
 Plug 'davidbeckingsale/writegood.vim', {'for' : ['markdown', 'tex'] }
@@ -44,19 +47,19 @@ Plug 'Christoomey/vim-tmux-navigator'
 
 Plug 'psolyca/vim-bbye'
 Plug 'junegunn/goyo.vim'
-Plug 'CallumHoward/vim-neodark'
-Plug 'tyrannicaltoucan/vim-deep-space'
+" Plug 'CallumHoward/vim-neodark'
+" Plug 'tyrannicaltoucan/vim-deep-space'
 
-Plug 'sheerun/vim-polyglot'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'Lokaltog/vim-monotone'
-Plug 'huyvohcmc/atlas.vim'
-Plug 'KKPMW/distilled-vim'
-Plug 'https://git.sr.ht/~romainl/vim-bruin'
-Plug 'robertmeta/nofrils'
-Plug 'axvr/photon.vim'
-Plug 'liuchengxu/space-vim-dark'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'tyrannicaltoucan/vim-quantum'
+" Plug 'Lokaltog/vim-monotone'
+" Plug 'huyvohcmc/atlas.vim'
+" Plug 'KKPMW/distilled-vim'
+" Plug 'https://git.sr.ht/~romainl/vim-bruin'
+" Plug 'robertmeta/nofrils'
+" Plug 'axvr/photon.vim'
+" Plug 'liuchengxu/space-vim-dark'
 
 
 " Fuzzy Find
@@ -84,8 +87,10 @@ if (v:version > 800 || has('nvim')) && (has('python') || has('python3')) && exec
     "    endif
     "endfunction
 
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
     Plug 'maximbaz/lightline-ale'
+    Plug 'prabirshrestha/vim-lsp', {'for': ['c', 'cpp' ]}
+    Plug 'mattn/vim-lsp-settings', {'for': ['c', 'cpp' ]}
 endif
 
 " All of your Plugins must be added before the following line
@@ -103,6 +108,21 @@ if exists('g:loaded_syntastic_plugin')
     let g:syntastic_cpp_check_header = 1
     let g:syntastic_debug = 0
 endif
+
+let g:lsp_diagnostics_enabled = 0
+
+augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ctags
@@ -179,10 +199,21 @@ function! WordCount()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Pandoc Markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+
+augroup pandoc_syntax
+  autocmd! FileType vimwiki set syntax=markdown.pandoc
+augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Deoplete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 "if !exists('g:deoplete#omni#input_patterns')
 "    let g:deoplete#omni#input_patterns = {}
@@ -190,19 +221,19 @@ let g:deoplete#enable_at_startup = 1
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " For conceal markers.
-if has('conceal')
+" if has('conceal')
   " set conceallevel=2 concealcursor=niv
-endif
+" endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Polyglot
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:polyglot_disabled = ['csv']
+" let g:polyglot_disabled = ['csv']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

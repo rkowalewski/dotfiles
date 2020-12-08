@@ -20,7 +20,8 @@ let g:neoformat_enabled_markdwon = ['prettier']
 set fo-=q
 
 set norelativenumber
-colorscheme seoul256
+" colorscheme seoul256
+execute 'hi SpellBad   gui=underline guisp=White'
 
 inoremap <leader><space><space> <C-V>u00a0
 
