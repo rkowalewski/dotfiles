@@ -26,7 +26,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 " Text editing
-Plug 'godlygeek/tabular', {'for' : ['markdown', 'tex'] }
+Plug 'godlygeek/tabular', {'for' : ['markdown', 'tex', 'text'] }
 "Plug 'plasticboy/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 " see http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/

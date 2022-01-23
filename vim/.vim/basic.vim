@@ -298,6 +298,7 @@ if has("autocmd")
 
     let excludedFileTypes = [
           \ "markdown",
+          \ "markdown.pandoc",
           \ "mkd.markdown"
           \]
 

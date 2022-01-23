@@ -24,6 +24,7 @@ path+=("$HOME/.npm_modules/bin")
 path+=("$HOME/.fzf/bin")
 path+=("$HOME/.cabal/bin")
 path+=("$HOME/go/bin")
+path+=("$HOME/.cargo/bin")
 
 [[ -f "$HOME/.zshenv.local" ]] && source $HOME/.zshenv.local
 
@@ -33,3 +34,4 @@ export PATH
 
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 
+source "$HOME/.cargo/env"

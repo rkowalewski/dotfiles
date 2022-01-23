@@ -63,7 +63,7 @@ export FZF_BASE="${HOME}/.fzf"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast solarized-man colorize common-aliases tmux ripgrep ssh-agent zsh_reload fzf vi-mode)
+plugins=(git gitfast solarized-man colorize common-aliases tmux ripgrep ssh-agent fzf vi-mode)
 ##
 
 
